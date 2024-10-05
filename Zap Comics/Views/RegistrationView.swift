@@ -8,11 +8,44 @@
 import SwiftUI
 
 struct RegistrationView: View {
+    @EnvironmentObject var viewModel: ContentViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            ZapContainer {
+                VStack(spacing: 18) {
+                    ResizableImage(
+                        name: "zap-logo",
+                        height: 340,
+                        width: UIScreen.main.bounds.width - 40,
+                        contentMode: .fit
+                    )
+                    
+                    ZapTextField(
+                        placeholder: "Username",
+                        text: $viewModel.loginName
+                    )
+                    
+                    ZapTextField(
+                        placeholder: "Password",
+                        text: $viewModel.loginPassword
+                    )
+                    .isSecure()
+                    
+                    ZapButton(
+                        action: {
+                        viewModel.register()
+                    },
+                        label: "Sign Up"
+                    )
+                }
+                .padding()
+            }
+        }
     }
 }
 
 #Preview {
     RegistrationView()
+        .environmentObject(ContentViewModel())
 }

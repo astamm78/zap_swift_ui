@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct DashboardView: View {
+    @EnvironmentObject var viewModel: ContentViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Dashboard")
+            
+            Text("Welcome " + (viewModel.currentUser?.username ?? ""))
+            
+            Button(
+                "Log Out"
+            ) {
+                viewModel.logOut()
+            }
+        }
     }
 }
 
 #Preview {
     DashboardView()
+        .environmentObject(ContentViewModel())
 }

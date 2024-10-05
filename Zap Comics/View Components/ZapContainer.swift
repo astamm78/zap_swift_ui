@@ -22,10 +22,14 @@ struct ZapContainer<Content: View>: View {
             )
             .ignoresSafeArea()
             .opacity(0.45)
+            
+            content
         }
     }
 }
 
-//#Preview {
-//    ZapBackground()
-//}
+#Preview {
+    ZapContainer {
+        Text("Howdy")
+    }
+}

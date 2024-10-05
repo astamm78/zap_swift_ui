@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+class LeftoverComicBook: SelectedComicBook {
+    
+    var shoppingList: ShoppingList?
+    
+    private enum CodingKeys: String, CodingKey {
+        case shoppingList = "shopping_list"
+    }
+    
+}
