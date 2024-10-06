@@ -8,19 +8,53 @@
 import SwiftUI
 
 struct DashboardView: View {
-    @EnvironmentObject var viewModel: ContentViewModel
+    enum DashboardTab: Int, CaseIterable, Identifiable {
+        var id: Int {
+            self.rawValue
+        }
+        
+        case newComics
+        case currentList
+        case recentLists
+        case storeFinder
+        
+        var displayName: String {
+            switch self {
+            case .newComics: return "New Comics"
+            case .currentList: return "Current List"
+            case .recentLists: return "Recent Lists"
+            case .storeFinder: return "Store Finder"
+            }
+        }
+        
+        var tabView: some View {
+            switch self {
+            case .newComics:
+                return AnyView(NewComicsView())
+            case .currentList:
+                return AnyView(CurrentListView())
+            case .recentLists:
+                return AnyView(RecentListsView())
+            case .storeFinder:
+                return AnyView(FindAStoreView())
+            }
+        }
+    }
+    
+    @State var selection: Int = DashboardTab.newComics.rawValue
+    
+    @EnvironmentObject var contentVM: ContentViewModel
+    @EnvironmentObject var dashboardVM: DashboardViewModel
     
     var body: some View {
-        VStack {
-            Text("Dashboard")
+        TabView(selection: $selection) {
+            ZapTabNav(dashboardTab: .newComics)
             
-            Text("Welcome " + (viewModel.currentUser?.username ?? ""))
+            ZapTabNav(dashboardTab: .currentList)
             
-            Button(
-                "Log Out"
-            ) {
-                viewModel.logOut()
-            }
+            ZapTabNav(dashboardTab: .recentLists)
+            
+            ZapTabNav(dashboardTab: .storeFinder)
         }
     }
 }

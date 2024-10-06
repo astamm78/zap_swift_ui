@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Publisher: Codable {
+class Publisher: Codable, Identifiable, Equatable {
     
     var id: Int
     var name: String
@@ -17,6 +17,10 @@ class Publisher: Codable {
         case id
         case name
         case comicBooks = "comic_books"
+    }
+    
+    static func == (lhs: Publisher, rhs: Publisher) -> Bool {
+        lhs.id == rhs.id
     }
     
 }

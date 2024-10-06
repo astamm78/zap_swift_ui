@@ -22,7 +22,8 @@ class SessionsNetwork: ZapNetwork {
             ]
         )
         
-        return handleSessionsResponse(response: response)
+        let userResponse: UserResponse? = handleResponse(response)
+        return userResponse
     }
     
     static func register(with username: String, and password: String) async throws -> UserResponse? {
@@ -37,19 +38,8 @@ class SessionsNetwork: ZapNetwork {
             ]
         )
          
-        return handleSessionsResponse(response: response)
-    }
-    
-    private static func handleSessionsResponse(response: JSONResult) -> UserResponse? {
-        switch response {
-        case .success(let successJSONResponse):
-            let data = successJSONResponse.data
-            let userResponse: UserResponse? = try? JSONDecoder().decode(UserResponse.self, from: data)
-            return userResponse
-        case .failure(let failureJSONResponse):
-            print("Login Error - \(failureJSONResponse.error)")
-            return nil
-        }
+        let userResponse: UserResponse? = handleResponse(response)
+        return userResponse
     }
     
 }

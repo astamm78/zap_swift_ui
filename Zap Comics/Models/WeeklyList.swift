@@ -15,14 +15,23 @@ class WeeklyList: Codable {
     var dateString: String
     var publishers: [Publisher]
     
-    var date: Date {
-        dateFormatter.date(from: dateString)!
+    var date: Date? {
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: dateString)
     }
     
     private enum CodingKeys: String, CodingKey {
         case id
-        case dateString = "date"
+        case dateString = "week"
         case publishers
     }
     
+}
+
+class WeeklyListResponse: Codable {
+    var weeklyList: WeeklyList
+    
+    private enum CodingKeys: String, CodingKey {
+        case weeklyList = "weekly_list"
+    }
 }

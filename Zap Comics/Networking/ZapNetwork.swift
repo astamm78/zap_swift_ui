@@ -29,4 +29,16 @@ class ZapNetwork {
         return network
     }
     
+    static func handleResponse<T: Codable>(_ response: JSONResult) -> T? {
+        switch response {
+        case .success(let successJSONResponse):
+            let data = successJSONResponse.data
+            let responseObject: T? = try? JSONDecoder().decode(T.self, from: data)
+            return responseObject
+        case .failure(let failureJSONResponse):
+            print("Login Error - \(failureJSONResponse.error)")
+            return nil
+        }
+    }
+    
 }

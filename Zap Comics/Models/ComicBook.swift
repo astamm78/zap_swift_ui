@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ComicBook: Codable {
+class ComicBook: Codable, Identifiable, Equatable {
     
     var id: Int
     var titleAndIssue: String
@@ -15,13 +15,15 @@ class ComicBook: Codable {
     var selected: Bool
     var title: String
     var followed: Bool
-    var lastPurchased: String
+    var lastPurchased: String?
     var description: String
     var creators: String
-    var imageURLString: String
+    var imageURLString: String?
 
     var imageURL: URL? {
-        URL(string: imageURLString)
+        guard let imageURLString else { return nil }
+        
+        return URL(string: imageURLString)
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -35,6 +37,10 @@ class ComicBook: Codable {
         case description
         case creators
         case imageURLString = "image_url"
+    }
+    
+    static func ==(lhs: ComicBook, rhs: ComicBook) -> Bool {
+        lhs.id == rhs.id
     }
     
 }
