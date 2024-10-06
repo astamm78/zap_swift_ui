@@ -27,7 +27,8 @@ struct ZapTabNav: View {
         }
         .tabItem {
             VStack{
-                Image(systemName: "1.square.fill")
+                Image(dashboardTab.iconName, bundle: nil)
+                    .renderingMode(.template)
                 Text(dashboardTab.displayName)
             }
         }

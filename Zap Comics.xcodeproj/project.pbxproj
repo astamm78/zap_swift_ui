@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E436C5532CB2F57A00B1F1CE /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5522CB2F57A00B1F1CE /* Networking */; };
+		E436C5562CB2F58500B1F1CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */; };
 		E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4D3670A2CB1EA0D008CF162 /* Networking */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E436C5562CB2F58500B1F1CE /* SDWebImageSwiftUI in Frameworks */,
+				E436C5532CB2F57A00B1F1CE /* Networking in Frameworks */,
 				E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -118,6 +122,8 @@
 			name = "Zap Comics";
 			packageProductDependencies = (
 				E4D3670A2CB1EA0D008CF162 /* Networking */,
+				E436C5522CB2F57A00B1F1CE /* Networking */,
+				E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */,
 			);
 			productName = "Zap Comics";
 			productReference = E456F7802CB1D7F700BCF142 /* Zap Comics.app */;
@@ -202,7 +208,8 @@
 			mainGroup = E456F7772CB1D7F700BCF142;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				E4D367092CB1EA0D008CF162 /* XCLocalSwiftPackageReference "Networking" */,
+				E436C5512CB2F57A00B1F1CE /* XCLocalSwiftPackageReference "Packages/Networking" */,
+				E436C5542CB2F58500B1F1CE /* XCLocalSwiftPackageReference "Packages/SDWebImageSwiftUI-master" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E456F7812CB1D7F700BCF142 /* Products */;
@@ -403,16 +410,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_ASSET_PATHS = "\"Zap Comics/Preview Content\"";
 				DEVELOPMENT_TEAM = VFK6A8UE9H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Zap-Comics-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Zap-List";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -420,7 +427,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewstamm.Zap-Comics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -439,16 +446,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_ASSET_PATHS = "\"Zap Comics/Preview Content\"";
 				DEVELOPMENT_TEAM = VFK6A8UE9H;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Zap-Comics-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "The Zap-List";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -456,7 +463,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewstamm.Zap-Comics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -583,13 +590,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		E4D367092CB1EA0D008CF162 /* XCLocalSwiftPackageReference "Networking" */ = {
+		E436C5512CB2F57A00B1F1CE /* XCLocalSwiftPackageReference "Packages/Networking" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = Networking;
+			relativePath = Packages/Networking;
+		};
+		E436C5542CB2F58500B1F1CE /* XCLocalSwiftPackageReference "Packages/SDWebImageSwiftUI-master" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "Packages/SDWebImageSwiftUI-master";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E436C5522CB2F57A00B1F1CE /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Networking;
+		};
+		E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SDWebImageSwiftUI;
+		};
 		E4D3670A2CB1EA0D008CF162 /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Networking;

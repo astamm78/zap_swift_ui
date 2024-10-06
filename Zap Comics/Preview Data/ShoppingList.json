@@ -1,0 +1,60 @@
+{
+    "shopping_list": {
+        "id": 9472,
+        "week": "2024-10-09",
+        "comic_books": [
+            {
+                "id": 143253,
+                "title_and_issue": "BLACK HAMMER OMNIBUS TP VOL 03",
+                "price": "$29.99",
+                "purchased": false,
+                "publisher": {
+                    "id": 952,
+                    "name": "DARK HORSE"
+                },
+                "description": "Years after Black Hammer and the rest of Spiral City's greatest heroes seemingly died defeating the cosmic despot known as Anti-God, Lucy Weber, the daughter of Black Hammer, took up his mantle and carried on the legacy of her father. Years after that, Lucy, and the world, have moved on. Living in the suburbs of Spiral City, Lucy is married and has children. But all is not blissful. Her marriage is falling apart, her job has reached a dead end, and for mysterious reasons, she hasn't picked up the hammer in years.  But, as her domestic life begins to crumble, the secrets of the last twenty years, and the reasons Lucy really gave up being Black Hammer, begin to resurface, threatening her family, and the peace she has tried hard to find for herself. Collects",
+                "creators": "(W) Jeff Lemire (A) Rich Tommaso, Dean Ormston, Emi Lenox",
+                "image_url": "https://zap-production.s3.amazonaws.com/weeks/449/comics/143253/open-uri20241003-13132-1kwyhwd"
+            },
+            {
+                "id": 143263,
+                "title_and_issue": "CASE CLOSED GN VOL 92",
+                "price": "$11.99",
+                "purchased": false,
+                "publisher": {
+                    "id": 566,
+                    "name": "VIZ MEDIA LLC"
+                },
+                "description": "After missing one hint after another, Conan finally gets a clue and remembers where he first met Sera, the girl detective with the mysterious past. Flash back to a childhood trip to the beach and watch young Jimmy Kudo track down a robber with the help of a very unusual family.",
+                "creators": "(W) Gosho Aoyama (A/CA) Gosho Aoyama",
+                "image_url": "https://zap-production.s3.amazonaws.com/weeks/449/comics/143263/open-uri20241003-13132-b0xvy8"
+            },
+            {
+                "id": 143268,
+                "title_and_issue": "COBRA COMMANDER #2 (OF 5) 3RD PTG",
+                "price": "$3.99",
+                "purchased": false,
+                "publisher": {
+                    "id": 33,
+                    "name": "IMAGE COMICS"
+                },
+                "description": "After last issue's shocking reveals, Cobra Commander searches for a power greater than any the Earth has ever seen.",
+                "creators": "(W) Joshua Williamson (A) Andrea Milana, Annalisa Leoni (CA) Michele Rubini, Giovanna Niro",
+                "image_url": "https://zap-production.s3.amazonaws.com/weeks/449/comics/143268/open-uri20241003-13132-10gg6kg"
+            },
+            {
+                "id": 143272,
+                "title_and_issue": "CREEPY ARCHIVES TP VOL 08",
+                "price": "$24.99",
+                "purchased": false,
+                "publisher": {
+                    "id": 952,
+                    "name": "DARK HORSE"
+                },
+                "description": "Now available in a value-priced paperback edition,",
+                "creators": "(W) Various (A) Tom Sutton, Richard Corben, Frank Frazetta",
+                "image_url": "https://zap-production.s3.amazonaws.com/weeks/449/comics/143272/open-uri20241003-13132-1tsf4cy"
+            }
+        ]
+    }
+}

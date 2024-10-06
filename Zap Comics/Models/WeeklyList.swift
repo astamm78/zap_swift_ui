@@ -26,6 +26,15 @@ class WeeklyList: Codable {
         case publishers
     }
     
+    func updateComicBook(_ addedComicBook: AddedComicBook) {
+        guard let publisher = publishers.first(where: { $0.id == addedComicBook.publisher.id }),
+              let comicBook = publisher.comicBooks.first(where: { $0.id == addedComicBook.id })  else {
+            return
+        }
+        
+        comicBook.selected.toggle()
+    }
+    
 }
 
 class WeeklyListResponse: Codable {
@@ -33,5 +42,15 @@ class WeeklyListResponse: Codable {
     
     private enum CodingKeys: String, CodingKey {
         case weeklyList = "weekly_list"
+    }
+}
+
+extension WeeklyListResponse {
+    static var preview: WeeklyListResponse {
+        let url = Bundle.main.url(forResource: "WeeklyList", withExtension: "json")!
+
+        let data = try? Data(contentsOf: url)
+        let responseObject: WeeklyListResponse? = try? JSONDecoder().decode(self, from: data!)
+        return responseObject!
     }
 }

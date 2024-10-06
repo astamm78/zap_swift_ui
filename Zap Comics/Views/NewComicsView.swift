@@ -8,48 +8,55 @@
 import SwiftUI
 
 struct NewComicsView: View {
-    @ObservedObject var viewModel = NewComicsViewModel()
+    @EnvironmentObject var viewModel: DashboardViewModel
     
     var body: some View {
-        List {
-            viewModel.weeklyList.map { weeklyList in
-                ForEach(weeklyList.publishers) { publisher in
-                    Section {
-                        if viewModel.selectedPublisher == publisher {
-                            ForEach(publisher.comicBooks) { comicBook in
-                                Text(comicBook.title)
+        ScrollView {
+            LazyVStack(
+                alignment: .leading,
+                spacing: 0,
+                pinnedViews: .sectionHeaders
+            ) {
+                    viewModel.weeklyList.map { weeklyList in
+                        ForEach(weeklyList.publishers) { publisher in
+                            Section {
+                                if viewModel.selectedPublisher == publisher {
+                                    ForEach(publisher.comicBooks) { comicBook in
+                                        ComicBookCell(comicBook: comicBook)
+                                    }
+                                }
+                            } header: {
+                                PublisherHeader(publisher: publisher)
                                     .onTapGesture {
-                                        viewModel.select(comicBook)
+                                        withAnimation {
+                                            viewModel.select(publisher)
+                                        }
                                     }
                             }
                         }
-                    } header: {
-                        Text(publisher.name)
-                            .onTapGesture {
-                                viewModel.select(publisher)
+                    }
+                }
+                .sheet(
+                    isPresented: $viewModel.showSheet) {
+                        viewModel.selectedComicBook.map { comicBook in
+                            ZStack {
+                                Color.red.ignoresSafeArea()
+                                
+                                Text(comicBook.titleAndIssue)
                             }
+                            .onTapGesture {
+                                viewModel.dismisSheet()
+                            }
+                        }
                     }
-                }
-            }
         }
-        .sheet(
-            isPresented: $viewModel.showSheet) {
-                viewModel.selectedComicBook.map { comicBook in
-                    ZStack {
-                        Color.red.ignoresSafeArea()
-                        
-                        Text(comicBook.titleAndIssue)
-                    }
-                    .onTapGesture {
-                        viewModel.dismisSheet()
-                    }
-                }
-            }
     }
 }
 
 #Preview {
-    NewComicsView(
-        viewModel: NewComicsViewModel()
-    )
+    let vm = DashboardViewModel()
+    vm.weeklyList = WeeklyListResponse.preview.weeklyList
+    
+    return NewComicsView()
+        .environmentObject(vm)
 }

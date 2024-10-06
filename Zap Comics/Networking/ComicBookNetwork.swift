@@ -6,3 +6,30 @@
 //
 
 import Foundation
+import Networking
+
+class ComicBookNetwork: ZapNetwork {
+    
+    static func addComicBookToList(_ comicBook: ComicBook) async throws -> AddedComicBookResponse? {
+        let response = try await service.post(
+            "/selected_comic_books",
+            parameterType: .json,
+            parameters: [
+                "selected_comic_books": [
+                    "comic_book_id": comicBook.id
+                ]
+            ]
+        )
+        
+        let comicBookResponse: AddedComicBookResponse? = handleResponse(response)
+        return comicBookResponse
+    }
+    
+    static func removeComicBookFromList(_ comicBook: ComicBook) async throws -> AddedComicBookResponse? {
+        let response = try await service.delete("/selected_comic_books/comic_book/\(comicBook.id)")
+        
+        let comicBookResponse: AddedComicBookResponse? = handleResponse(response)
+        return comicBookResponse
+    }
+    
+}

@@ -11,7 +11,35 @@ struct CurrentListHeader: View {
     var title: String
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading, spacing: 0) {
+            Rectangle()
+                .foregroundStyle(.gray)
+                .frame(height: 0.6)
+            
+            HStack(alignment: .center, spacing: 12) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(title)
+                        .fontWeight(.bold)
+                        .foregroundStyle(.gray)
+                }
+                
+                Spacer()
+            }
+            .padding()
+            .frame(height: 60)
+            .background(
+                LinearGradient(
+                    colors: [.gray.opacity(0.25), .white],
+                    startPoint: .bottomLeading,
+                    endPoint: .topTrailing
+                )
+            )
+            
+            Rectangle()
+                .foregroundStyle(.gray)
+                .frame(height: 0.6)
+        }
+        .background(.white)
     }
 }
 

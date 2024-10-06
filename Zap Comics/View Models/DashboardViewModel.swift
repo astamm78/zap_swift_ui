@@ -1,5 +1,5 @@
 //
-//  NewComicsViewModel.swift
+//  DashboardViewModel.swift
 //  Zap Comics
 //
 //  Created by Andrew Stamm on 10/5/24.
@@ -14,8 +14,11 @@ class DashboardViewModel: ObservableObject {
     @Published var selectedComicBook: ComicBook? = nil
     @Published var showSheet = false
     
+    @Published var currentList: ShoppingList?
+    
     init() {
         getWeeklyList()
+        getCurrentList()
     }
     
     private func getWeeklyList() {
@@ -23,6 +26,14 @@ class DashboardViewModel: ObservableObject {
             guard let weeklyListResponse = try? await WeeklyListNetwork.getWeeklyList() else { return }
             
             self.weeklyList = weeklyListResponse.weeklyList
+        }
+    }
+    
+    private func getCurrentList() {
+        Task {
+            guard let currentList = try? await ShoppingListNetwork.getShoppingList() else { return }
+            
+            self.currentList = currentList.shoppingList.allComicsSelected()
         }
     }
     
@@ -47,5 +58,37 @@ class DashboardViewModel: ObservableObject {
     func dismisSheet() {
         selectedComicBook = nil
         showSheet = false
+    }
+    
+    func comicBookActionTapped(_ comicBook: ComicBook) {
+        comicBook.selected ? removeComicBookFromList(comicBook) : addComicBookToList(comicBook)
+    }
+    
+    func addComicBookToList(_ comicBook: ComicBook) {
+        guard let weeklyList else { return }
+        
+        Task {
+            guard let comicBookResponse = try? await ComicBookNetwork.addComicBookToList(comicBook) else { return }
+        
+            let mutableWeeklyList = weeklyList
+            mutableWeeklyList.updateComicBook(comicBookResponse.addedComicBook)
+            
+            self.weeklyList = mutableWeeklyList
+            self.getCurrentList()
+        }
+    }
+    
+    func removeComicBookFromList(_ comicBook: ComicBook) {
+        guard let weeklyList else { return }
+        
+        Task {
+            guard let comicBookResponse = try? await ComicBookNetwork.removeComicBookFromList(comicBook) else { return }
+            
+            let mutableWeeklyList = weeklyList
+            mutableWeeklyList.updateComicBook(comicBookResponse.addedComicBook)
+            
+            self.weeklyList = mutableWeeklyList
+            self.getCurrentList()
+        }
     }
 }

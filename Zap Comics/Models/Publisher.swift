@@ -6,12 +6,19 @@
 //
 
 import Foundation
+import SwiftUI
 
 class Publisher: Codable, Identifiable, Equatable {
     
     var id: Int
     var name: String
-    var comicBooks: [ComicBook]
+    @Default<Empty> var comicBooks: [ComicBook]
+    
+    init(id: Int, name: String, comicBooks: [ComicBook]) {
+        self.id = id
+        self.name = name
+        self.comicBooks = comicBooks
+    }
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -23,4 +30,19 @@ class Publisher: Codable, Identifiable, Equatable {
         lhs.id == rhs.id
     }
     
+    var imageName: String {
+        "logo-\(name.lowercased())"
+    }
+    
+    var logoImage: Image {
+        let uiImage =  (UIImage(named: imageName) ?? UIImage(named: "logo-pub-default"))!
+        return Image(uiImage: uiImage)
+    }
+    
+}
+
+extension Publisher {
+    static var preview: Publisher {
+        Publisher(id: 1, name: "DC Comics", comicBooks: [])
+    }
 }

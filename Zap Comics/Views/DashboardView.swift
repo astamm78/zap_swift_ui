@@ -39,6 +39,15 @@ struct DashboardView: View {
                 return AnyView(FindAStoreView())
             }
         }
+        
+        var iconName: String {
+            switch self {
+            case .newComics: return "icon-weekly_list"
+            case .currentList: return "icon-pull_list"
+            case .recentLists: return "icon-past_lists"
+            case .storeFinder: return "icon-find_store"
+            }
+        }
     }
     
     @State var selection: Int = DashboardTab.newComics.rawValue

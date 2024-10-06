@@ -33,8 +33,13 @@ class ZapNetwork {
         switch response {
         case .success(let successJSONResponse):
             let data = successJSONResponse.data
-            let responseObject: T? = try? JSONDecoder().decode(T.self, from: data)
-            return responseObject
+            do {
+                let responseObject: T? = try JSONDecoder().decode(T.self, from: data)
+                return responseObject
+            } catch {
+                print(String(describing: error))
+                return nil
+            }
         case .failure(let failureJSONResponse):
             print("Login Error - \(failureJSONResponse.error)")
             return nil
