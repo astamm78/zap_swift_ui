@@ -10,14 +10,16 @@ import Foundation
 class ComicBook: Codable, Identifiable, Equatable {
     
     var id: Int
-    @Default<Empty> var title: String
     var titleAndIssue: String
     var price: String
     var lastPurchased: String?
-    var description: String
-    var creators: String
+    var description: String?
+    var creators: String?
     var imageURLString: String?
     var publisher: Publisher?
+    var shoppingList: ShoppingList?
+
+    @Default<Empty> var title: String
 
     @Default<False> var selected: Bool
     @Default<False> var followed: Bool
@@ -38,6 +40,7 @@ class ComicBook: Codable, Identifiable, Equatable {
         case followed
         case purchased
         case publisher
+        case shoppingList = "shopping_list"
         case lastPurchased = "last_purchased"
         case description
         case creators

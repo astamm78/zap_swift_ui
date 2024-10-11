@@ -15,10 +15,12 @@ class DashboardViewModel: ObservableObject {
     @Published var showSheet = false
     
     @Published var currentList: ShoppingList?
+    @Published var leftoverList: LeftoverList?
     
     init() {
         getWeeklyList()
         getCurrentList()
+        getLeftovers()
     }
     
     private func getWeeklyList() {
@@ -34,6 +36,17 @@ class DashboardViewModel: ObservableObject {
             guard let currentList = try? await ShoppingListNetwork.getShoppingList() else { return }
             
             self.currentList = currentList.shoppingList.allComicsSelected()
+        }
+    }
+    
+    private func getLeftovers() {
+        Task {
+            guard let leftoverList = try? await ShoppingListNetwork.getLeftovers() else {
+                self.leftoverList = nil
+                return
+            }
+            
+            self.leftoverList = leftoverList.allComicsSelected()
         }
     }
     
@@ -89,6 +102,28 @@ class DashboardViewModel: ObservableObject {
             
             self.weeklyList = mutableWeeklyList
             self.getCurrentList()
+        }
+    }
+    
+    func markComicBookPurchased(_ comicBook: ComicBook) {
+        guard let shoppingList = comicBook.shoppingList ?? currentList else { return }
+        
+        Task {
+            guard let _ = try? await ComicBookNetwork.updatePurchaseStatus(
+                for: comicBook,
+                and: shoppingList,
+                purchased: !comicBook.purchased
+            ) else {
+                return
+            }
+
+            let mutableCurrentList = currentList
+            mutableCurrentList?.updateComicBook(comicBook)
+            self.currentList = mutableCurrentList
+            
+            let mutableLeftoverList = leftoverList
+            mutableLeftoverList?.updateComicBook(comicBook)
+            self.leftoverList = mutableLeftoverList
         }
     }
 }

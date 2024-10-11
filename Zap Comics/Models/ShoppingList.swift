@@ -12,8 +12,9 @@ class ShoppingList: Codable {
     let dateFormatter = DateFormatter()
     
     var id: Int
-    var comicBooks: [ComicBook]
     var dateString: String
+
+    @Default<Empty> var comicBooks: [ComicBook]
     
     var date: Date? {
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -27,7 +28,7 @@ class ShoppingList: Codable {
     }
     
     func allComicsSelected() -> Self {
-        var comicBooks = self.comicBooks
+        let comicBooks = self.comicBooks
         
         comicBooks.forEach { comicBook in
             comicBook.selected = true
@@ -35,6 +36,14 @@ class ShoppingList: Codable {
         
         self.comicBooks = comicBooks
         return self
+    }
+    
+    func updateComicBook(_ comicBook: ComicBook) {
+        guard let _comicBook = comicBooks.first(where: { $0.id == comicBook.id })  else {
+            return
+        }
+        
+        _comicBook.purchased.toggle()
     }
 }
 

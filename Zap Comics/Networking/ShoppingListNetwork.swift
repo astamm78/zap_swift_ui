@@ -17,11 +17,11 @@ class ShoppingListNetwork: ZapNetwork {
         return shoppingListResponse
     }
     
-    static func getLeftovers() async throws -> ShoppingListResponse? {
+    static func getLeftovers() async throws -> LeftoverList? {
         let response = try await service.get("/shopping_lists/leftover")
         
-        let shoppingListResponse: ShoppingListResponse? = handleResponse(response)
-        return shoppingListResponse
+        let leftoverList: LeftoverList? = handleResponse(response)
+        return leftoverList
     }
     
 }

@@ -46,4 +46,13 @@ class ZapNetwork {
         }
     }
     
+    static func handleEmptyResponse(_ response: JSONResult) -> Bool {
+        switch response {
+        case .success:
+            return true
+        case .failure:
+            return false
+        }
+    }
+    
 }

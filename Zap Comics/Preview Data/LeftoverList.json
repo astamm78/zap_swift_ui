@@ -1,0 +1,38 @@
+{
+    "shopping_lists": [
+        {
+            "id": 16668,
+            "title_and_issue": "Secret Empire #4",
+            "price": "$3.99",
+            "description": null,
+            "creators": null,
+            "image_url": null,
+            "purchased": false,
+            "shopping_list": {
+                "id": 71,
+                "week": "2017-06-14"
+            },
+            "publisher": {
+                "id": 37,
+                "name": "MARVEL COMICS"
+            }
+        },
+        {
+            "id": 29796,
+            "title_and_issue": "SAGA #53",
+            "price": "$2.99",
+            "description": "Uh-oh.",
+            "creators": "(W) Brian K. Vaughan (A/CA) Fiona Staples",
+            "image_url": "https://zap-production.s3.amazonaws.com/weeks/129/comics/29796/open-uri20180621-8622-1j7gx5d",
+            "purchased": false,
+            "shopping_list": {
+                "id": 894,
+                "week": "2018-06-27"
+            },
+            "publisher": {
+                "id": 33,
+                "name": "IMAGE COMICS"
+            }
+        }
+    ]
+}

@@ -8,8 +8,14 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
+class ComicBookCellViewModel: ObservableObject {
+    @Published var isPurchaseView: Bool = false
+}
+
 struct ComicBookCell: View {
     @EnvironmentObject var dashboardVM: DashboardViewModel
+    
+    @ObservedObject var viewModel = ComicBookCellViewModel()
     
     var comicBook: ComicBook
     
@@ -32,29 +38,46 @@ struct ComicBookCell: View {
                     )
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Button {
-                        dashboardVM.comicBookActionTapped(comicBook)
-                    } label: {
-                        if comicBook.selected {
-                            ResizableImage(
-                                name: "icon-remove_comic",
-                                height: 20,
-                                width: 20,
-                                contentMode: .fit,
-                                templateRenderingMode: .template,
-                                imageColor: .gray
-                            )
-                        } else {
-                            ResizableImage(
-                                name: "icon-add_comic",
-                                height: 20,
-                                width: 20,
-                                contentMode: .fit,
-                                templateRenderingMode: .template,
-                                imageColor: .zapBlue
-                            )
+                    HStack(alignment: .center, spacing: 8) {
+                        if viewModel.isPurchaseView {
+                            Button {
+                                dashboardVM.markComicBookPurchased(comicBook)
+                            } label: {
+                                ResizableImage(
+                                    name: "icon-purchase",
+                                    height: 20,
+                                    width: 20,
+                                    contentMode: .fit,
+                                    templateRenderingMode: .template,
+                                    imageColor: comicBook.purchased ? .green : .gray
+                                )
+                            }
                         }
                         
+                        Button {
+                            dashboardVM.comicBookActionTapped(comicBook)
+                        } label: {
+                            if comicBook.selected {
+                                ResizableImage(
+                                    name: "icon-remove_comic",
+                                    height: 20,
+                                    width: 20,
+                                    contentMode: .fit,
+                                    templateRenderingMode: .template,
+                                    imageColor: .gray
+                                )
+                            } else {
+                                ResizableImage(
+                                    name: "icon-add_comic",
+                                    height: 20,
+                                    width: 20,
+                                    contentMode: .fit,
+                                    templateRenderingMode: .template,
+                                    imageColor: .zapBlue
+                                )
+                            }
+                            
+                        }
                     }
                     .padding(.bottom, 8)
                     
@@ -66,6 +89,12 @@ struct ComicBookCell: View {
                     Text(comicBook.titleAndIssue)
                         .fontWeight(.bold)
                         .foregroundStyle(.gray)
+                    
+                    comicBook.shoppingList.map { shoppingList in
+                        Text(shoppingList.dateString)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.gray)
+                    }
                     
                     Spacer()
                     
@@ -97,9 +126,33 @@ struct ComicBookCell: View {
         }
         .background(.white)
     }
+    
+    func setPurchaseView() -> Self {
+        viewModel.isPurchaseView = true
+        return self
+    }
 }
 
 #Preview {
     ComicBookCell(comicBook: ComicBook.preview)
+        .environmentObject(DashboardViewModel())
+}
+
+#Preview("Shopping List View") {
+    let comicBook = ComicBook.preview
+    comicBook.selected = true
+    
+    return ComicBookCell(comicBook: comicBook)
+        .setPurchaseView()
+        .environmentObject(DashboardViewModel())
+}
+
+#Preview("Shopping List View Purchased") {
+    let comicBook = ComicBook.preview
+    comicBook.selected = true
+    comicBook.purchased = true
+    
+    return ComicBookCell(comicBook: comicBook)
+        .setPurchaseView()
         .environmentObject(DashboardViewModel())
 }

@@ -17,13 +17,27 @@ struct CurrentListView: View {
                 spacing: 0,
                 pinnedViews: .sectionHeaders
             ) {
-                viewModel.currentList.map { currentList in
+                if let currentList = viewModel.currentList,
+                   !currentList.comicBooks.isEmpty {
                     Section {
                         ForEach(currentList.comicBooks) { comicBook in
                             ComicBookCell(comicBook: comicBook)
+                                .setPurchaseView()
                         }
                     } header: {
                         CurrentListHeader(title: currentList.dateString)
+                    }
+                }
+                
+                if let leftoverList = viewModel.leftoverList,
+                   !leftoverList.comicBooks.isEmpty {
+                    Section {
+                        ForEach(leftoverList.comicBooks) { comicBook in
+                            ComicBookCell(comicBook: comicBook)
+                                .setPurchaseView()
+                        }
+                    } header: {
+                        CurrentListHeader(title: "Leftovers")
                     }
                 }
             }
@@ -46,7 +60,8 @@ struct CurrentListView: View {
 
 #Preview {
     let vm = DashboardViewModel()
-    vm.currentList = ShoppingList.preview.shoppingList
+    vm.currentList = ShoppingList.preview.shoppingList.allComicsSelected()
+    vm.leftoverList = LeftoverList.preview.allComicsSelected()
     
     return CurrentListView()
         .environmentObject(vm)

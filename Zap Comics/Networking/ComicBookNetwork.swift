@@ -32,4 +32,22 @@ class ComicBookNetwork: ZapNetwork {
         return comicBookResponse
     }
     
+    static func updatePurchaseStatus(
+        for comicBook: ComicBook,
+        and shoppingList: ShoppingList,
+        purchased: Bool
+    ) async throws -> Bool {
+        let response = try await service.put(
+            "/selected_comic_books/comic_book/\(comicBook.id)/shopping_list/\(shoppingList.id)",
+            parameterType: .json,
+            parameters: [
+                "selected_comic_book": [
+                    "purchased": purchased
+                ]
+            ]
+        )
+        
+        return handleEmptyResponse(response)
+    }
+    
 }
