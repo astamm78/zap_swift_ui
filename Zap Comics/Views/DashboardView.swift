@@ -58,7 +58,7 @@ struct DashboardView: View {
     var body: some View {
         TabView(selection: $selection) {
             ZapTabNav(dashboardTab: .newComics)
-            
+
             ZapTabNav(dashboardTab: .currentList)
             
             ZapTabNav(dashboardTab: .recentLists)
@@ -69,6 +69,10 @@ struct DashboardView: View {
 }
 
 #Preview {
-    DashboardView()
+    let dVM = DashboardViewModel()
+    dVM.dataLoaded = true
+
+    return DashboardView()
         .environmentObject(ContentViewModel())
+        .environmentObject(dVM)
 }

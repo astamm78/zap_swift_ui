@@ -16,7 +16,17 @@ class DashboardViewModel: ObservableObject {
     
     @Published var currentList: ShoppingList?
     @Published var leftoverList: LeftoverList?
-    
+
+    @Published var dataLoaded: Bool = false
+
+    var finishedNetworkRequests: [String] = [] {
+        didSet {
+            if finishedNetworkRequests.count >= 3 {
+                dataLoaded = true
+            }
+        }
+    }
+
     init() {
         getWeeklyList()
         getCurrentList()
@@ -28,6 +38,7 @@ class DashboardViewModel: ObservableObject {
             guard let weeklyListResponse = try? await WeeklyListNetwork.getWeeklyList() else { return }
             
             self.weeklyList = weeklyListResponse.weeklyList
+            self.finishedNetworkRequests.append("Weekly List")
         }
     }
     
@@ -36,6 +47,7 @@ class DashboardViewModel: ObservableObject {
             guard let currentList = try? await ShoppingListNetwork.getShoppingList() else { return }
             
             self.currentList = currentList.shoppingList.allComicsSelected()
+            self.finishedNetworkRequests.append("Current List")
         }
     }
     
@@ -47,6 +59,7 @@ class DashboardViewModel: ObservableObject {
             }
             
             self.leftoverList = leftoverList.allComicsSelected()
+            self.finishedNetworkRequests.append("Leftovers")
         }
     }
     
@@ -83,10 +96,9 @@ class DashboardViewModel: ObservableObject {
         Task {
             guard let comicBookResponse = try? await ComicBookNetwork.addComicBookToList(comicBook) else { return }
         
-            let mutableWeeklyList = weeklyList
-            mutableWeeklyList.updateComicBook(comicBookResponse.addedComicBook)
-            
-            self.weeklyList = mutableWeeklyList
+            let updatedList = weeklyList.updateComicBook(comicBook)
+
+            self.weeklyList = updatedList
             self.getCurrentList()
         }
     }
@@ -97,17 +109,17 @@ class DashboardViewModel: ObservableObject {
         Task {
             guard let comicBookResponse = try? await ComicBookNetwork.removeComicBookFromList(comicBook) else { return }
             
-            let mutableWeeklyList = weeklyList
-            mutableWeeklyList.updateComicBook(comicBookResponse.addedComicBook)
-            
-            self.weeklyList = mutableWeeklyList
+            let updatedList = weeklyList.updateComicBook(comicBook)
+
+            self.weeklyList = updatedList
             self.getCurrentList()
         }
     }
     
     func markComicBookPurchased(_ comicBook: ComicBook) {
-        guard let shoppingList = comicBook.shoppingList ?? currentList else { return }
-        
+        guard let weeklyList,
+              let shoppingList = comicBook.shoppingList ?? currentList else { return }
+
         Task {
             guard let _ = try? await ComicBookNetwork.updatePurchaseStatus(
                 for: comicBook,
@@ -117,13 +129,11 @@ class DashboardViewModel: ObservableObject {
                 return
             }
 
-            var mutableCurrentList = currentList
-            mutableCurrentList?.updateComicBook(comicBook)
-            self.currentList = mutableCurrentList
-            
-            var mutableLeftoverList = leftoverList
-            mutableLeftoverList?.updateComicBook(comicBook)
-            self.leftoverList = mutableLeftoverList
+            let updatedList = weeklyList.updateComicBook(comicBook)
+            self.weeklyList = updatedList
+
+            let updatedLeftovers = leftoverList?.updateComicBook(comicBook)
+            self.leftoverList = updatedLeftovers
         }
     }
 }

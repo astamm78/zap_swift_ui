@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LeftoverList: Codable, Previewable, ComicBookList {
+class LeftoverList: Codable, Previewable, PurchasableComicBookList {
 
     typealias PreviewType = LeftoverList
 

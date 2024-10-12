@@ -54,3 +54,13 @@ class ComicBook: Codable, Identifiable, Equatable, Previewable {
     }
     
 }
+
+class ComicBookResponse: Codable, Previewable {
+    typealias PreviewType = ComicBookResponse
+
+    var comicBook: ComicBook
+
+    private enum CodingKeys: String, CodingKey {
+        case comicBook = "comic_book"
+    }
+}

@@ -17,12 +17,12 @@ final class ComicBookNetwork_XCTest: XCTestCase {
     override func setUpWithError() throws {
         ZapNetwork.service.fakePOST(
             "/selected_comic_books",
-            fileName: "AddedComicBookResponse.json"
+            fileName: "ComicBookResponse.json"
         )
 
         ZapNetwork.service.fakeDELETE(
             "/selected_comic_books/comic_book/\(comicBook.id)",
-            fileName: "AddedComicBookResponse.json"
+            fileName: "ComicBookResponse.json"
         )
 
         ZapNetwork.service.fakePUT(

@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol ComicBookList {
+protocol PurchasableComicBookList {
     var comicBooks: [ComicBook] { get set }
 }
 
-extension ComicBookList {
+extension PurchasableComicBookList {
     mutating func allComicsSelected() -> Self {
         let comicBooks = self.comicBooks
 
@@ -23,11 +23,14 @@ extension ComicBookList {
         return self
     }
 
-    mutating func updateComicBook(_ comicBook: ComicBook) {
-        guard let _comicBook = comicBooks.first(where: { $0.id == comicBook.id })  else {
-            return
+    func updateComicBook(_ comicBook: ComicBook) -> Self {
+        let mutable = self
+
+        guard let _comicBook = mutable.comicBooks.first(where: { $0.id == comicBook.id })  else {
+            return self
         }
 
         _comicBook.purchased.toggle()
+        return mutable
     }
 }

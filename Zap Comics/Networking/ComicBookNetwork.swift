@@ -10,7 +10,7 @@ import Networking
 
 class ComicBookNetwork: ZapNetwork {
     
-    static func addComicBookToList(_ comicBook: ComicBook) async throws -> AddedComicBookResponse? {
+    static func addComicBookToList(_ comicBook: ComicBook) async throws -> ComicBookResponse? {
         let response = try await service.post(
             "/selected_comic_books",
             parameterType: .json,
@@ -21,14 +21,14 @@ class ComicBookNetwork: ZapNetwork {
             ]
         )
         
-        let comicBookResponse: AddedComicBookResponse? = handleResponse(response)
+        let comicBookResponse: ComicBookResponse? = handleResponse(response)
         return comicBookResponse
     }
     
-    static func removeComicBookFromList(_ comicBook: ComicBook) async throws -> AddedComicBookResponse? {
+    static func removeComicBookFromList(_ comicBook: ComicBook) async throws -> ComicBookResponse? {
         let response = try await service.delete("/selected_comic_books/comic_book/\(comicBook.id)")
         
-        let comicBookResponse: AddedComicBookResponse? = handleResponse(response)
+        let comicBookResponse: ComicBookResponse? = handleResponse(response)
         return comicBookResponse
     }
     

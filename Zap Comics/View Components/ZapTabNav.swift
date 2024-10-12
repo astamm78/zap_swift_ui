@@ -9,21 +9,40 @@ import SwiftUI
 
 struct ZapTabNav: View {
     var dashboardTab: DashboardView.DashboardTab
-    
+
+    let coloredNavAppearance = UINavigationBarAppearance()
+
+    init(dashboardTab: DashboardView.DashboardTab) {
+        self.dashboardTab = dashboardTab
+
+        coloredNavAppearance.configureWithOpaqueBackground()
+        coloredNavAppearance.backgroundColor = .zapYellow
+        coloredNavAppearance.titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+
+        coloredNavAppearance.largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+
+        UINavigationBar.appearance().standardAppearance = coloredNavAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = coloredNavAppearance
+    }
+
     var body: some View {
         NavigationView{
             dashboardTab.tabView
                 .navigationBarTitle(dashboardTab.displayName, displayMode: .inline)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Image(systemName: "star.fill")
+                        Image("zap-logo-small")
                     }
                 }
-                .navigationBarItems(
-                    leading: Button("Left") {},
-                    trailing: Button("Right") {}
-                )
-            
+                // .navigationBarItems(
+                //     leading: Button("Left") {},
+                //     trailing: Button("Right") {}
+                // )
+
         }
         .tabItem {
             VStack{
@@ -38,5 +57,9 @@ struct ZapTabNav: View {
 }
 
 #Preview {
-    ZapTabNav(dashboardTab: .newComics)
+    let vm = DashboardViewModel()
+    vm.dataLoaded = true
+
+    return ZapTabNav(dashboardTab: .newComics)
+        .environmentObject(vm)
 }

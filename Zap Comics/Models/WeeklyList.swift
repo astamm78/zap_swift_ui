@@ -28,13 +28,19 @@ class WeeklyList: Codable, Previewable {
         case publishers
     }
     
-    func updateComicBook(_ addedComicBook: AddedComicBook) {
-        guard let publisher = publishers.first(where: { $0.id == addedComicBook.publisher.id }),
-              let comicBook = publisher.comicBooks.first(where: { $0.id == addedComicBook.id })  else {
-            return
+    func updateComicBook(_ addedComicBook: ComicBook) -> Self {
+        var mutable = self
+
+        for publisher in mutable.publishers {
+            for comicBook in publisher.comicBooks {
+                if comicBook == addedComicBook {
+                    comicBook.selected.toggle()
+                    return mutable
+                }
+            }
         }
-        
-        comicBook.selected.toggle()
+
+        return self
     }
     
 }

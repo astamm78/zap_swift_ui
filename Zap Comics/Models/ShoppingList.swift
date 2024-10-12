@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShoppingList: Codable, ComicBookList, Previewable {
+class ShoppingList: Codable, PurchasableComicBookList, Previewable {
 
     typealias PreviewType = ShoppingList
 

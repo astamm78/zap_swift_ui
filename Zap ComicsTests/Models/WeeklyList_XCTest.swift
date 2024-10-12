@@ -26,12 +26,11 @@ final class WeeklyList_XCTest: XCTestCase {
 
         let initialValue = comicBook.selected
 
-        let addedComicBook = AddedComicBook.preview
-        addedComicBook.id = comicBook.id
+        let updatedList = weeklyList.updateComicBook(comicBook)
+        let updatedPublisher = updatedList.publishers.first(where: { $0 == publisher })!
+        let updatedComic = updatedPublisher.comicBooks.first(where: { $0 == comicBook })!
 
-        weeklyList.updateComicBook(addedComicBook)
-
-        XCTAssert(comicBook.selected != initialValue)
+        XCTAssert(updatedComic.selected != initialValue)
     }
 
 }
