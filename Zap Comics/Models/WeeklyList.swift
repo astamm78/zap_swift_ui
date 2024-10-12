@@ -7,8 +7,10 @@
 
 import Foundation
 
-class WeeklyList: Codable {
-    
+class WeeklyList: Codable, Previewable {
+
+    typealias PreviewType = WeeklyList
+
     let dateFormatter = DateFormatter()
     
     var id: Int
@@ -37,20 +39,12 @@ class WeeklyList: Codable {
     
 }
 
-class WeeklyListResponse: Codable {
+class WeeklyListResponse: Codable, Previewable {
+    typealias PreviewType = WeeklyListResponse
+
     var weeklyList: WeeklyList
     
     private enum CodingKeys: String, CodingKey {
         case weeklyList = "weekly_list"
-    }
-}
-
-extension WeeklyListResponse {
-    static var preview: WeeklyListResponse {
-        let url = Bundle.main.url(forResource: "WeeklyList", withExtension: "json")!
-
-        let data = try? Data(contentsOf: url)
-        let responseObject: WeeklyListResponse? = try? JSONDecoder().decode(self, from: data!)
-        return responseObject!
     }
 }

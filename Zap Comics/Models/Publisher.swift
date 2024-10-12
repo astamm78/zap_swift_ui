@@ -8,8 +8,10 @@
 import Foundation
 import SwiftUI
 
-class Publisher: Codable, Identifiable, Equatable {
-    
+class Publisher: Codable, Identifiable, Equatable, Previewable {
+
+    typealias PreviewType = Publisher
+
     var id: Int
     var name: String
     @Default<Empty> var comicBooks: [ComicBook]
@@ -39,10 +41,4 @@ class Publisher: Codable, Identifiable, Equatable {
         return Image(uiImage: uiImage)
     }
     
-}
-
-extension Publisher {
-    static var preview: Publisher {
-        Publisher(id: 1, name: "DC Comics", comicBooks: [])
-    }
 }

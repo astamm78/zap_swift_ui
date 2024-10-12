@@ -7,8 +7,10 @@
 
 import Foundation
 
-class ComicBook: Codable, Identifiable, Equatable {
-    
+class ComicBook: Codable, Identifiable, Equatable, Previewable {
+
+    typealias PreviewType = ComicBook
+
     var id: Int
     var titleAndIssue: String
     var price: String
@@ -51,14 +53,4 @@ class ComicBook: Codable, Identifiable, Equatable {
         lhs.id == rhs.id
     }
     
-}
-
-extension ComicBook {
-    static var preview: ComicBook {
-        let url = Bundle.main.url(forResource: "ComicBook", withExtension: "json")!
-
-        let data = try? Data(contentsOf: url)
-        let responseObject: ComicBook? = try? JSONDecoder().decode(self, from: data!)
-        return responseObject!
-    }
 }

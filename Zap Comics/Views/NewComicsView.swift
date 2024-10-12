@@ -55,7 +55,7 @@ struct NewComicsView: View {
 
 #Preview {
     let vm = DashboardViewModel()
-    vm.weeklyList = WeeklyListResponse.preview.weeklyList
+    vm.weeklyList = WeeklyList.preview
     
     return NewComicsView()
         .environmentObject(vm)

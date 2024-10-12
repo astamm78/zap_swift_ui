@@ -7,8 +7,10 @@
 
 import Foundation
 
-class User: Codable {
-    
+class User: Codable, Previewable {
+
+    typealias PreviewType = User
+
     static let curentUserKey: String = "current.user"
     
     var id: Int
@@ -50,6 +52,8 @@ class User: Codable {
     
 }
 
-class UserResponse: Codable {
+class UserResponse: Codable, Previewable {
+    typealias PreviewType = UserResponse
+
     var user: User
 }

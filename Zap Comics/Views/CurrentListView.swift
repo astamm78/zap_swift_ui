@@ -60,9 +60,12 @@ struct CurrentListView: View {
 
 #Preview {
     let vm = DashboardViewModel()
-    vm.currentList = ShoppingList.preview.shoppingList.allComicsSelected()
-    vm.leftoverList = LeftoverList.preview.allComicsSelected()
-    
+    var shoppingList = ShoppingList.preview
+    vm.currentList = shoppingList.allComicsSelected()
+
+    var leftoverList = LeftoverList.preview
+    vm.leftoverList = leftoverList.allComicsSelected()
+
     return CurrentListView()
         .environmentObject(vm)
 }

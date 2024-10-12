@@ -41,7 +41,7 @@ class DashboardViewModel: ObservableObject {
     
     private func getLeftovers() {
         Task {
-            guard let leftoverList = try? await ShoppingListNetwork.getLeftovers() else {
+            guard var leftoverList = try? await ShoppingListNetwork.getLeftovers() else {
                 self.leftoverList = nil
                 return
             }
@@ -117,11 +117,11 @@ class DashboardViewModel: ObservableObject {
                 return
             }
 
-            let mutableCurrentList = currentList
+            var mutableCurrentList = currentList
             mutableCurrentList?.updateComicBook(comicBook)
             self.currentList = mutableCurrentList
             
-            let mutableLeftoverList = leftoverList
+            var mutableLeftoverList = leftoverList
             mutableLeftoverList?.updateComicBook(comicBook)
             self.leftoverList = mutableLeftoverList
         }

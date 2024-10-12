@@ -7,18 +7,21 @@
 
 import Foundation
 
-class AddedComicBook: Codable {
-    
+class AddedComicBook: Codable, Previewable {
+
+    typealias PreviewType = AddedComicBook
+
     var id: Int
     var publisher: Publisher
     
 }
 
-class AddedComicBookResponse: Codable {
+class AddedComicBookResponse: Codable, Previewable {
+    typealias PreviewType = AddedComicBookResponse
+
     var addedComicBook: AddedComicBook
     
     private enum CodingKeys: String, CodingKey {
         case addedComicBook = "comic_book"
     }
-
 }

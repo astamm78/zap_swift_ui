@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "6DD2A25C-042A-4F29-B7F2-88541055908D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Zap Comics.xcodeproj",
+      "identifier" : "E456F77F2CB1D7F700BCF142",
+      "name" : "Zap Comics"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "skippedTests" : [
+        "AddedComicBook_XCTest"
+      ],
+      "target" : {
+        "containerPath" : "container:Zap Comics.xcodeproj",
+        "identifier" : "E456F78F2CB1D7F900BCF142",
+        "name" : "Zap ComicsTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "skippedTests" : [
+        "Zap_ComicsUITests",
+        "Zap_ComicsUITests\/testExample()",
+        "Zap_ComicsUITests\/testLaunchPerformance()"
+      ],
+      "target" : {
+        "containerPath" : "container:Zap Comics.xcodeproj",
+        "identifier" : "E456F7992CB1D7F900BCF142",
+        "name" : "Zap ComicsUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

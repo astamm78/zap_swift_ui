@@ -54,5 +54,5 @@ class ZapNetwork {
             return false
         }
     }
-    
+
 }

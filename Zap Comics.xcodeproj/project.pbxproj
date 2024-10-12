@@ -30,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E4016D082CB9CB9700BD4186 /* Zap Comics.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Zap Comics.xctestplan"; sourceTree = "<group>"; };
 		E456F7802CB1D7F700BCF142 /* Zap Comics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zap Comics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E456F7902CB1D7F900BCF142 /* Zap ComicsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zap ComicsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zap ComicsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +85,7 @@
 		E456F7772CB1D7F700BCF142 = {
 			isa = PBXGroup;
 			children = (
+				E4016D082CB9CB9700BD4186 /* Zap Comics.xctestplan */,
 				E456F7822CB1D7F700BCF142 /* Zap Comics */,
 				E456F7932CB1D7F900BCF142 /* Zap ComicsTests */,
 				E456F79D2CB1D7F900BCF142 /* Zap ComicsUITests */,
