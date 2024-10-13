@@ -41,7 +41,14 @@ class User: Codable, Previewable {
         
         return UserDefaults.standard.synchronize()
     }
-    
+
+    @discardableResult
+    static func clearCurrentUser() -> Bool {
+        UserDefaults.standard.removeObject(forKey: User.curentUserKey)
+
+        return UserDefaults.standard.synchronize()
+    }
+
     static var current: User? {
         guard let encoded = UserDefaults.standard.data(forKey: User.curentUserKey) else {
             return nil

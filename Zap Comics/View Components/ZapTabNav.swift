@@ -36,6 +36,7 @@ struct ZapTabNav: View {
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Image("zap-logo-small")
+                            .accessibilityIdentifier(TestingIdentifiers.Dashboard.navLogoImage)
                     }
                 }
                 // .navigationBarItems(

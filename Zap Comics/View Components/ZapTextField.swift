@@ -17,7 +17,9 @@ struct ZapTextField: View {
     @ObservedObject var viewModel = ZapTextFieldViewModel()
     
     @Binding var text: String
-    
+
+    var accessibilityIdentifier: String?
+
     var body: some View {
         VStack {
             if viewModel.isPasswordField {
@@ -26,11 +28,17 @@ struct ZapTextField: View {
                     text: $text
                 )
                 .autocapitalization(.none)
+                .if(accessibilityIdentifier != nil) { view in
+                    view.accessibilityIdentifier(accessibilityIdentifier!)
+                }
             } else {
                 TextField(
                     placeholder,
                     text: $text
                 )
+                .if(accessibilityIdentifier != nil) { view in
+                    view.accessibilityIdentifier(accessibilityIdentifier!)
+                }
                 .autocapitalization(.none)
             }
         }
@@ -41,7 +49,6 @@ struct ZapTextField: View {
             RoundedRectangle(cornerRadius: 16)
                 .stroke(.gray, lineWidth: 3)
         )
-        
     }
     
     func isSecure() -> Self {

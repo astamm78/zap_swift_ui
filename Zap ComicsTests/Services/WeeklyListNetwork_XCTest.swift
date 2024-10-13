@@ -17,6 +17,7 @@ final class WeeklyListNetwork_XCTest: XCTestCase {
 
     override func tearDownWithError() throws {}
 
+    @MainActor
     func test_getWeeklyList_returnsWeeklyListResponse() throws {
         Task {
             let response = try? await WeeklyListNetwork.getWeeklyList()

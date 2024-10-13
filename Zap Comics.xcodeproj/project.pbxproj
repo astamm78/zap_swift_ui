@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E436C5532CB2F57A00B1F1CE /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5522CB2F57A00B1F1CE /* Networking */; };
 		E436C5562CB2F58500B1F1CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */; };
+		E48482A82CBB747100BF3E9D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E48482A72CBB747100BF3E9D /* SDWebImageSwiftUI */; };
+		E48482AA2CBB753000BF3E9D /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E48482A92CBB753000BF3E9D /* Networking */; };
 		E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4D3670A2CB1EA0D008CF162 /* Networking */; };
 /* End PBXBuildFile section */
 
@@ -36,9 +38,24 @@
 		E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zap ComicsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E48482AC2CBB755C00BF3E9D /* Exceptions for "Zap Comics" folder in "Zap ComicsUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Extensions/View+Zap.swift",
+				Helpers/TestingIdentifiers.swift,
+				Helpers/UITestArguments.swift,
+			);
+			target = E456F7992CB1D7F900BCF142 /* Zap ComicsUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E456F7822CB1D7F700BCF142 /* Zap Comics */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E48482AC2CBB755C00BF3E9D /* Exceptions for "Zap Comics" folder in "Zap ComicsUITests" target */,
+			);
 			path = "Zap Comics";
 			sourceTree = "<group>";
 		};
@@ -76,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E48482AA2CBB753000BF3E9D /* Networking in Frameworks */,
+				E48482A82CBB747100BF3E9D /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +108,7 @@
 				E456F7822CB1D7F700BCF142 /* Zap Comics */,
 				E456F7932CB1D7F900BCF142 /* Zap ComicsTests */,
 				E456F79D2CB1D7F900BCF142 /* Zap ComicsUITests */,
+				E48482A62CBB747100BF3E9D /* Frameworks */,
 				E456F7812CB1D7F700BCF142 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -101,6 +121,13 @@
 				E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E48482A62CBB747100BF3E9D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +199,8 @@
 			);
 			name = "Zap ComicsUITests";
 			packageProductDependencies = (
+				E48482A72CBB747100BF3E9D /* SDWebImageSwiftUI */,
+				E48482A92CBB753000BF3E9D /* Networking */,
 			);
 			productName = "Zap ComicsUITests";
 			productReference = E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */;
@@ -612,6 +641,16 @@
 		E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SDWebImageSwiftUI;
+		};
+		E48482A72CBB747100BF3E9D /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E436C5542CB2F58500B1F1CE /* XCLocalSwiftPackageReference "Packages/SDWebImageSwiftUI-master" */;
+			productName = SDWebImageSwiftUI;
+		};
+		E48482A92CBB753000BF3E9D /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E436C5512CB2F57A00B1F1CE /* XCLocalSwiftPackageReference "Packages/Networking" */;
+			productName = Networking;
 		};
 		E4D3670A2CB1EA0D008CF162 /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;

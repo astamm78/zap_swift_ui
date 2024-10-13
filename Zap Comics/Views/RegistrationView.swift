@@ -23,12 +23,14 @@ struct RegistrationView: View {
                     
                     ZapTextField(
                         placeholder: "Username",
-                        text: $viewModel.loginName
+                        text: $viewModel.loginName,
+                        accessibilityIdentifier: TestingIdentifiers.RegistrationView.registerUsernameTextField
                     )
                     
                     ZapTextField(
                         placeholder: "Password",
-                        text: $viewModel.loginPassword
+                        text: $viewModel.loginPassword,
+                        accessibilityIdentifier: TestingIdentifiers.RegistrationView.registerPasswordTextField
                     )
                     .isSecure()
                     
@@ -38,6 +40,7 @@ struct RegistrationView: View {
                     },
                         label: "Sign Up"
                     )
+                    .accessibilityIdentifier(TestingIdentifiers.RegistrationView.registerButton)
                 }
                 .padding()
             }
