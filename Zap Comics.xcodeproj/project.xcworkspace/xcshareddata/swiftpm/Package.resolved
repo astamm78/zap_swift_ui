@@ -1,6 +1,15 @@
 {
-  "originHash" : "5a8a2158ef78ec5f745364f72d86b974874c4bf7b422a0884d716f4af4059775",
+  "originHash" : "2a50b93c1f5caa7d2ad4c3f891001016fc30ed0d473c1056725cd8460e1070dd",
   "pins" : [
+    {
+      "identity" : "networking",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/3lvis/Networking",
+      "state" : {
+        "revision" : "127ac618bc264074c2c6edaa9d496b5519deef4c",
+        "version" : "6.15.0"
+      }
+    },
     {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
@@ -8,6 +17,15 @@
       "state" : {
         "revision" : "8a1be70a625683bc04d6903e2935bf23f3c6d609",
         "version" : "5.19.7"
+      }
+    },
+    {
+      "identity" : "sdwebimageswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI",
+      "state" : {
+        "revision" : "5aa947356f4ea49a0c3b9968564267f6ea5abea7",
+        "version" : "3.1.2"
       }
     }
   ],

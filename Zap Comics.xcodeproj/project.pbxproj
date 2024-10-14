@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		E436C5532CB2F57A00B1F1CE /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5522CB2F57A00B1F1CE /* Networking */; };
 		E436C5562CB2F58500B1F1CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */; };
-		E48482A82CBB747100BF3E9D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E48482A72CBB747100BF3E9D /* SDWebImageSwiftUI */; };
-		E48482AA2CBB753000BF3E9D /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E48482A92CBB753000BF3E9D /* Networking */; };
+		E438DEFC2CBDA2E50010EA02 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E438DEFB2CBDA2E50010EA02 /* SDWebImageSwiftUI */; };
+		E48BB65E2CBD990F00D33B96 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E48BB65D2CBD990F00D33B96 /* SDWebImageSwiftUI */; };
+		E4C2B4D92CBD9514003ACF27 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4C2B4D82CBD9514003ACF27 /* Networking */; };
 		E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4D3670A2CB1EA0D008CF162 /* Networking */; };
 /* End PBXBuildFile section */
 
@@ -76,8 +77,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E48BB65E2CBD990F00D33B96 /* SDWebImageSwiftUI in Frameworks */,
 				E436C5562CB2F58500B1F1CE /* SDWebImageSwiftUI in Frameworks */,
 				E436C5532CB2F57A00B1F1CE /* Networking in Frameworks */,
+				E4C2B4D92CBD9514003ACF27 /* Networking in Frameworks */,
 				E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,8 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E48482AA2CBB753000BF3E9D /* Networking in Frameworks */,
-				E48482A82CBB747100BF3E9D /* SDWebImageSwiftUI in Frameworks */,
+				E438DEFC2CBDA2E50010EA02 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,7 +110,6 @@
 				E456F7822CB1D7F700BCF142 /* Zap Comics */,
 				E456F7932CB1D7F900BCF142 /* Zap ComicsTests */,
 				E456F79D2CB1D7F900BCF142 /* Zap ComicsUITests */,
-				E48482A62CBB747100BF3E9D /* Frameworks */,
 				E456F7812CB1D7F700BCF142 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,13 +122,6 @@
 				E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		E48482A62CBB747100BF3E9D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +147,8 @@
 				E4D3670A2CB1EA0D008CF162 /* Networking */,
 				E436C5522CB2F57A00B1F1CE /* Networking */,
 				E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */,
+				E4C2B4D82CBD9514003ACF27 /* Networking */,
+				E48BB65D2CBD990F00D33B96 /* SDWebImageSwiftUI */,
 			);
 			productName = "Zap Comics";
 			productReference = E456F7802CB1D7F700BCF142 /* Zap Comics.app */;
@@ -199,8 +195,7 @@
 			);
 			name = "Zap ComicsUITests";
 			packageProductDependencies = (
-				E48482A72CBB747100BF3E9D /* SDWebImageSwiftUI */,
-				E48482A92CBB753000BF3E9D /* Networking */,
+				E438DEFB2CBDA2E50010EA02 /* SDWebImageSwiftUI */,
 			);
 			productName = "Zap ComicsUITests";
 			productReference = E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */;
@@ -239,8 +234,8 @@
 			mainGroup = E456F7772CB1D7F700BCF142;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				E436C5512CB2F57A00B1F1CE /* XCLocalSwiftPackageReference "Packages/Networking" */,
-				E436C5542CB2F58500B1F1CE /* XCLocalSwiftPackageReference "Packages/SDWebImageSwiftUI-master" */,
+				E4C2B4D72CBD9514003ACF27 /* XCRemoteSwiftPackageReference "Networking" */,
+				E48BB65C2CBD990F00D33B96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E456F7812CB1D7F700BCF142 /* Products */;
@@ -622,16 +617,24 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		E436C5512CB2F57A00B1F1CE /* XCLocalSwiftPackageReference "Packages/Networking" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = Packages/Networking;
+/* Begin XCRemoteSwiftPackageReference section */
+		E48BB65C2CBD990F00D33B96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.2;
+			};
 		};
-		E436C5542CB2F58500B1F1CE /* XCLocalSwiftPackageReference "Packages/SDWebImageSwiftUI-master" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "Packages/SDWebImageSwiftUI-master";
+		E4C2B4D72CBD9514003ACF27 /* XCRemoteSwiftPackageReference "Networking" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/3lvis/Networking";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.15.0;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		E436C5522CB2F57A00B1F1CE /* Networking */ = {
@@ -642,14 +645,19 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = SDWebImageSwiftUI;
 		};
-		E48482A72CBB747100BF3E9D /* SDWebImageSwiftUI */ = {
+		E438DEFB2CBDA2E50010EA02 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E436C5542CB2F58500B1F1CE /* XCLocalSwiftPackageReference "Packages/SDWebImageSwiftUI-master" */;
+			package = E48BB65C2CBD990F00D33B96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
 		};
-		E48482A92CBB753000BF3E9D /* Networking */ = {
+		E48BB65D2CBD990F00D33B96 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E436C5512CB2F57A00B1F1CE /* XCLocalSwiftPackageReference "Packages/Networking" */;
+			package = E48BB65C2CBD990F00D33B96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		E4C2B4D82CBD9514003ACF27 /* Networking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4C2B4D72CBD9514003ACF27 /* XCRemoteSwiftPackageReference "Networking" */;
 			productName = Networking;
 		};
 		E4D3670A2CB1EA0D008CF162 /* Networking */ = {
