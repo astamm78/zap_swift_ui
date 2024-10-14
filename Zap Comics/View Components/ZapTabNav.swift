@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ZapTabNav: View {
+    @EnvironmentObject var contentVM: ContentViewModel
+
     var dashboardTab: DashboardView.DashboardTab
 
     let coloredNavAppearance = UINavigationBarAppearance()
@@ -39,11 +41,21 @@ struct ZapTabNav: View {
                             .accessibilityIdentifier(TestingIdentifiers.Dashboard.navLogoImage)
                     }
                 }
-                // .navigationBarItems(
-                //     leading: Button("Left") {},
-                //     trailing: Button("Right") {}
-                // )
+                .navigationBarItems(
+                    leading: Menu(content: {
+                        Button {
+                            contentVM.logOut()
+                        } label: {
+                            Text("Sign Out")
+                        }
+                        .accessibilityIdentifier(TestingIdentifiers.Dashboard.logoutButton)
+                    }, label: {
+                        Image(systemName: "line.horizontal.3")
+                            .fontWeight(.bold)
+                            .accessibilityIdentifier(TestingIdentifiers.Dashboard.menuButton)
+                    })
 
+                )
         }
         .tabItem {
             VStack{
@@ -52,6 +64,8 @@ struct ZapTabNav: View {
                 Text(dashboardTab.displayName)
             }
         }
+        .accessibilityIdentifier(dashboardTab.testingIdentifier)
+        .accessibilityAddTraits(.isSelected)
         .toolbarBackground(.visible, for: .tabBar)
         .toolbarBackground(Color.zapYellow, for: .tabBar)
     }
@@ -63,4 +77,5 @@ struct ZapTabNav: View {
 
     return ZapTabNav(dashboardTab: .newComics)
         .environmentObject(vm)
+        .environmentObject(ContentViewModel())
 }

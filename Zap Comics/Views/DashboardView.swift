@@ -48,6 +48,19 @@ struct DashboardView: View {
             case .storeFinder: return "icon-find_store"
             }
         }
+
+        var testingIdentifier: String {
+            switch self {
+            case .newComics:
+                TestingIdentifiers.Dashboard.newComicsTabButton
+            case .currentList:
+                TestingIdentifiers.Dashboard.currentListTabButton
+            case .recentLists:
+                TestingIdentifiers.Dashboard.pastListsTabButton
+            case .storeFinder:
+                TestingIdentifiers.Dashboard.storeFinderTabButton
+            }
+        }
     }
     
     @State var selection: Int = DashboardTab.newComics.rawValue
@@ -60,7 +73,7 @@ struct DashboardView: View {
             ZapTabNav(dashboardTab: .newComics)
 
             ZapTabNav(dashboardTab: .currentList)
-            
+
             ZapTabNav(dashboardTab: .recentLists)
             
             ZapTabNav(dashboardTab: .storeFinder)

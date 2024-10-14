@@ -28,5 +28,12 @@ extension Zap_ComicsApp {
         if args.contains(UITestArguments.loggedOut) {
             User.clearCurrentUser()
         }
+
+        if args.contains(UITestArguments.loggedIn) {
+            guard let _ = User.current else {
+                User.preview.save()
+                return
+            }
+        }
     }
 }

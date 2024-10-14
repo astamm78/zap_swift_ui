@@ -9,5 +9,5 @@ import Foundation
 
 enum UITestArguments {
     public static var loggedOut = "-loggedOut"
-    public static var registrationFlow = "-registrationFlow"
+    public static var loggedIn = "-loggedIn"
 }

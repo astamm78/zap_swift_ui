@@ -55,6 +55,7 @@ struct CurrentListView: View {
                     }
                 }
         }
+        .accessibilityIdentifier(TestingIdentifiers.CurrentListView.currentListView)
     }
 }
 

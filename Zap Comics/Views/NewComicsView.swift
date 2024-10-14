@@ -51,7 +51,10 @@ struct NewComicsView: View {
                             }
                         }
             }
-        }, loadingComplete: viewModel.dataLoaded)
+            .accessibilityIdentifier(TestingIdentifiers.NewComicsView.newComicsView)
+        },
+             loadingComplete: viewModel.dataLoaded
+        )
     }
 }
 
