@@ -21,7 +21,7 @@ class ComicBook: Codable, Identifiable, Equatable, Previewable, ObservableObject
     var publisher: Publisher?
     var shoppingList: ShoppingList?
 
-    var title: String?
+    var title: String
 
     @Published var selected: Bool
     @Published var followed: Bool
@@ -56,7 +56,7 @@ class ComicBook: Codable, Identifiable, Equatable, Previewable, ObservableObject
         titleAndIssue = try container.decode(String.self, forKey: .titleAndIssue)
         price = try container.decode(String.self, forKey: .price)
         selected = try container.decodeIfPresent(Bool.self, forKey: .selected) ?? false
-        title = try container.decodeIfPresent(String.self, forKey: .title)
+        title = try container.decodeIfPresent(String.self, forKey: .title) ?? ""
         followed = try container.decodeIfPresent(Bool.self, forKey: .followed) ?? false
         purchased = try container.decodeIfPresent(Bool.self, forKey: .purchased) ?? false
         publisher = try container.decodeIfPresent(Publisher.self, forKey: .publisher)

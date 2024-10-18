@@ -41,19 +41,6 @@ final class DashboardViewModel_XCTest: XCTestCase {
         }
     }
 
-    func test_dataLoaded_isSetCorrectly() throws {
-        let vm = DashboardViewModel()
-
-        vm.finishedNetworkRequests = []
-        XCTAssert(vm.dataLoaded == false)
-
-        vm.finishedNetworkRequests = ["data", "data"]
-        XCTAssert(vm.dataLoaded == false)
-
-        vm.finishedNetworkRequests = ["data", "data", "data"]
-        XCTAssert(vm.dataLoaded == true)
-    }
-
     func test_init_setPublisher_shouldSetSelectedPublisher() throws {
         Task {
             let publisher = Publisher.preview

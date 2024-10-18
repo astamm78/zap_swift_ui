@@ -19,7 +19,7 @@ class LeftoverList: Codable, Previewable, ComicBookListHandler, ObservableObject
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        comicBooks = try container.decode([ComicBook].self, forKey: .comicBooks)
+        comicBooks = try container.decodeIfPresent([ComicBook].self, forKey: .comicBooks) ?? []
     }
     
     func encode(to encoder: Encoder) throws {

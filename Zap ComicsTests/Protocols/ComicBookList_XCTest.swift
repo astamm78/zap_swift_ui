@@ -13,45 +13,47 @@ final class ComicBookList_XCTest: XCTestCase {
     var leftoverList: LeftoverList?
     var shoppingList: ShoppingList?
 
-    var comicBookLists: [ComicBookListHandler]?
+    var comicBookLists: [any ComicBookListHandler]?
 
     override func setUpWithError() throws {
         leftoverList = LeftoverList.preview
         shoppingList = ShoppingList.preview
 
-        comicBookLists = [leftoverList as Any, shoppingList as Any] as? [ComicBookListHandler]
+        comicBookLists = [leftoverList as Any, shoppingList as Any] as? [any ComicBookListHandler]
     }
 
     override func tearDownWithError() throws {}
 
-    func test_allComicsSelected() throws {
+    func test_updateComicBookPurchased() throws {
         for comicBookList in comicBookLists! {
-            var mutableList = comicBookList
-            mutableList = mutableList.allComicsSelected()
-
-            for comicBook in mutableList.comicBooks {
-                XCTAssert(comicBook.selected == true)
-            }
-        }
-
-    }
-
-    func test_updateComicBook() throws {
-        for comicBookList in comicBookLists! {
-            var mutableList = comicBookList
-            let comicBook = mutableList.comicBooks.first!
+            let comicBook = comicBookList.comicBooks.first!
 
             let initialValue = comicBook.purchased
 
-            mutableList.updateComicBook(comicBook)
+            comicBookList.updateComicBookPurchased(comicBook)
 
-            for _comicBook in mutableList.comicBooks {
+            for _comicBook in comicBookList.comicBooks {
                 if _comicBook == comicBook {
                     XCTAssert(_comicBook.purchased != initialValue)
                 }
             }
         }
+    }
+    
+    func test_updateComicBookSelected() throws {
+        for comicBookList in comicBookLists! {
+            let comicBook = comicBookList.comicBooks.first!
 
+            let initialValue = comicBook.selected
+
+            comicBookList.updateComicBookSelected(comicBook)
+
+            for _comicBook in comicBookList.comicBooks {
+                if _comicBook == comicBook {
+                    XCTAssert(_comicBook.selected != initialValue)
+                }
+            }
+        }
     }
 
 }

@@ -18,7 +18,7 @@ final class WeeklyList_XCTest: XCTestCase {
         XCTAssert(WeeklyList.preview.date != nil)
     }
 
-    func test_updateComicBook() {
+    func test_updateComicBookSelected() {
         let weeklyList = WeeklyList.preview
         let publisher = weeklyList.publishers.first!
 
@@ -26,11 +26,26 @@ final class WeeklyList_XCTest: XCTestCase {
 
         let initialValue = comicBook.selected
 
-        let updatedList = weeklyList.updateComicBook(comicBook)
-        let updatedPublisher = updatedList.publishers.first(where: { $0 == publisher })!
+        weeklyList.updateComicBookSelected(comicBook)
+        let updatedPublisher = weeklyList.publishers.first(where: { $0 == publisher })!
         let updatedComic = updatedPublisher.comicBooks.first(where: { $0 == comicBook })!
 
         XCTAssert(updatedComic.selected != initialValue)
+    }
+    
+    func test_updateComicBookPurchased() {
+        let weeklyList = WeeklyList.preview
+        let publisher = weeklyList.publishers.first!
+
+        let comicBook = publisher.comicBooks.first!
+
+        let initialValue = comicBook.purchased
+
+        weeklyList.updateComicBookPurchased(comicBook)
+        let updatedPublisher = weeklyList.publishers.first(where: { $0 == publisher })!
+        let updatedComic = updatedPublisher.comicBooks.first(where: { $0 == comicBook })!
+
+        XCTAssert(updatedComic.purchased != initialValue)
     }
 
 }

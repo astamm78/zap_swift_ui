@@ -24,6 +24,7 @@ extension Previewable {
     private static func loadPreview(from filename: String) -> PreviewType {
         let url = Bundle.main.url(forResource: filename, withExtension: "json")!
         let data = try! Data(contentsOf: url)
+        print(String(describing: PreviewType.self))
         return try! JSONDecoder().decode(PreviewType.self, from: data)
     }
 }

@@ -9,6 +9,7 @@ import XCTest
 import Networking
 @testable import Zap_Comics
 
+@MainActor
 final class ShoppingListNetwork_XCTest: XCTestCase {
 
     override func setUpWithError() throws {

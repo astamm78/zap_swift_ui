@@ -33,7 +33,7 @@ class ShoppingList: Codable, ComicBookListHandler, Previewable, ObservableObject
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
         dateString = try container.decode(String.self, forKey: .dateString)
-        comicBooks = try container.decode([ComicBook].self, forKey: .comicBooks)
+        comicBooks = try container.decodeIfPresent([ComicBook].self, forKey: .comicBooks) ?? []
     }
     
     func encode(to encoder: Encoder) throws {
