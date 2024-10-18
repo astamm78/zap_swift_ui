@@ -13,13 +13,13 @@ final class ComicBookList_XCTest: XCTestCase {
     var leftoverList: LeftoverList?
     var shoppingList: ShoppingList?
 
-    var comicBookLists: [PurchasableComicBookList]?
+    var comicBookLists: [ComicBookListHandler]?
 
     override func setUpWithError() throws {
         leftoverList = LeftoverList.preview
         shoppingList = ShoppingList.preview
 
-        comicBookLists = [leftoverList as Any, shoppingList as Any] as? [PurchasableComicBookList]
+        comicBookLists = [leftoverList as Any, shoppingList as Any] as? [ComicBookListHandler]
     }
 
     override func tearDownWithError() throws {}

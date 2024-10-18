@@ -10,9 +10,11 @@ import SwiftUI
 struct ZapContainer<Content: View>: View {
     @ViewBuilder var content: Content
     
+    var backgroundColor: Color = Color.zapYellow
+    
     var body: some View {
         ZStack {
-            Color.zapYellow
+            backgroundColor
                 .ignoresSafeArea()
             
             LinearGradient(
@@ -22,6 +24,8 @@ struct ZapContainer<Content: View>: View {
             )
             .ignoresSafeArea()
             .opacity(0.45)
+            
+            DotBackground()
             
             content
         }

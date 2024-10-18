@@ -10,11 +10,11 @@ import SwiftUI
 struct ZapTabNav: View {
     @EnvironmentObject var contentVM: ContentViewModel
 
-    var dashboardTab: DashboardView.DashboardTab
+    var dashboardTab: DashboardTab
 
     let coloredNavAppearance = UINavigationBarAppearance()
 
-    init(dashboardTab: DashboardView.DashboardTab) {
+    init(dashboardTab: DashboardTab) {
         self.dashboardTab = dashboardTab
 
         coloredNavAppearance.configureWithOpaqueBackground()
@@ -73,7 +73,6 @@ struct ZapTabNav: View {
 
 #Preview {
     let vm = DashboardViewModel()
-    vm.dataLoaded = true
 
     return ZapTabNav(dashboardTab: .newComics)
         .environmentObject(vm)

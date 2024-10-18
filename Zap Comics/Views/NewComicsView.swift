@@ -53,14 +53,13 @@ struct NewComicsView: View {
             }
             .accessibilityIdentifier(TestingIdentifiers.NewComicsView.newComicsView)
         },
-             loadingComplete: viewModel.dataLoaded
+             loadingComplete: viewModel.weeklyList != nil
         )
     }
 }
 
 #Preview {
     let vm = DashboardViewModel()
-    vm.dataLoaded = true
     vm.weeklyList = WeeklyList.preview
     
     return NewComicsView()

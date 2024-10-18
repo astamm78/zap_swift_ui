@@ -17,8 +17,9 @@ struct ZapButton: View {
         } label: {
             HStack {
                 VStack {
-                    Text(label)
+                    Text(label.uppercased())
                         .foregroundStyle(.white)
+                        .fontWeight(.bold)
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -32,7 +33,7 @@ struct ZapButton: View {
 
 #Preview {
     VStack {
-        ZapButton(label: "Submit!")
+        ZapButton(label: "Submit")
     }
     .padding()
 }

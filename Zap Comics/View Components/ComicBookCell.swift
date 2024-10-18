@@ -16,8 +16,7 @@ struct ComicBookCell: View {
     @EnvironmentObject var dashboardVM: DashboardViewModel
     
     @ObservedObject var viewModel = ComicBookCellViewModel()
-    
-    var comicBook: ComicBook
+    @ObservedObject var comicBook: ComicBook
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -55,9 +54,9 @@ struct ComicBookCell: View {
                         }
                         
                         Button {
-                            dashboardVM.comicBookActionTapped(comicBook)
+                            dashboardVM.comicBookActionTapped(comicBook, isPurchaseView: viewModel.isPurchaseView)
                         } label: {
-                            if comicBook.selected {
+                            if comicBook.selected || viewModel.isPurchaseView {
                                 ResizableImage(
                                     name: "icon-remove_comic",
                                     height: 20,
@@ -76,7 +75,6 @@ struct ComicBookCell: View {
                                     imageColor: .zapBlue
                                 )
                             }
-                            
                         }
                     }
                     .padding(.bottom, 8)
@@ -139,8 +137,7 @@ struct ComicBookCell: View {
 }
 
 #Preview("Shopping List View") {
-    let comicBook = ComicBook.preview
-    comicBook.selected = true
+    var comicBook = ComicBook.preview
     
     return ComicBookCell(comicBook: comicBook)
         .setPurchaseView()
@@ -148,9 +145,7 @@ struct ComicBookCell: View {
 }
 
 #Preview("Shopping List View Purchased") {
-    let comicBook = ComicBook.preview
-    comicBook.selected = true
-    comicBook.purchased = true
+    var comicBook = ComicBook.preview
     
     return ComicBookCell(comicBook: comicBook)
         .setPurchaseView()

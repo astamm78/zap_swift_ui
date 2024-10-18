@@ -9,57 +9,42 @@ import Foundation
 
 @MainActor
 class DashboardViewModel: ObservableObject {
-    @Published var weeklyList: WeeklyList?
     @Published var selectedPublisher: Publisher? = nil
     @Published var selectedComicBook: ComicBook? = nil
     @Published var showSheet = false
     
+    @Published var weeklyList: WeeklyList?
     @Published var currentList: ShoppingList?
     @Published var leftoverList: LeftoverList?
 
-    @Published var dataLoaded: Bool = false
-
-    var finishedNetworkRequests: [String] = [] {
-        didSet {
-            if finishedNetworkRequests.count >= 3 {
-                dataLoaded = true
-            }
-        }
-    }
-
-    init() {
-        getWeeklyList()
-        getCurrentList()
-        getLeftovers()
-    }
+    @Published var currentListViewEmpty: Bool = false
     
-    private func getWeeklyList() {
+    @Published var selectedTab: DashboardTab = .newComics
+    
+    func getWeeklyList() {
         Task {
             guard let weeklyListResponse = try? await WeeklyListNetwork.getWeeklyList() else { return }
             
             self.weeklyList = weeklyListResponse.weeklyList
-            self.finishedNetworkRequests.append("Weekly List")
         }
     }
     
-    private func getCurrentList() {
+    func getCurrentList() {
         Task {
             guard let currentList = try? await ShoppingListNetwork.getShoppingList() else { return }
             
-            self.currentList = currentList.shoppingList.allComicsSelected()
-            self.finishedNetworkRequests.append("Current List")
+            self.currentList = currentList.shoppingList
         }
     }
     
-    private func getLeftovers() {
+    func getLeftovers() {
         Task {
-            guard var leftoverList = try? await ShoppingListNetwork.getLeftovers() else {
+            guard let leftoverList = try? await ShoppingListNetwork.getLeftovers() else {
                 self.leftoverList = nil
                 return
             }
             
-            self.leftoverList = leftoverList.allComicsSelected()
-            self.finishedNetworkRequests.append("Leftovers")
+            self.leftoverList = leftoverList
         }
     }
     
@@ -86,40 +71,39 @@ class DashboardViewModel: ObservableObject {
         showSheet = false
     }
     
-    func comicBookActionTapped(_ comicBook: ComicBook) {
-        comicBook.selected ? removeComicBookFromList(comicBook) : addComicBookToList(comicBook)
+    func comicBookActionTapped(_ comicBook: ComicBook, isPurchaseView: Bool) {
+        if comicBook.selected || isPurchaseView {
+            removeComicBookFromList(comicBook)
+        } else {
+            addComicBookToList(comicBook)
+        }
     }
     
     func addComicBookToList(_ comicBook: ComicBook) {
-        guard let weeklyList else { return }
-        
         Task {
-            guard let comicBookResponse = try? await ComicBookNetwork.addComicBookToList(comicBook) else { return }
+            guard let _ = try? await ComicBookNetwork.addComicBookToList(comicBook) else { return }
         
-            let updatedList = weeklyList.updateComicBook(comicBook)
-
-            self.weeklyList = updatedList
-            self.getCurrentList()
+            weeklyList?.updateComicBookSelected(comicBook)
+            
+            getCurrentList()
+            getLeftovers()
         }
     }
     
     func removeComicBookFromList(_ comicBook: ComicBook) {
-        guard let weeklyList else { return }
-        
         Task {
-            guard let comicBookResponse = try? await ComicBookNetwork.removeComicBookFromList(comicBook) else { return }
+            guard let _ = try? await ComicBookNetwork.removeComicBookFromList(comicBook) else { return }
             
-            let updatedList = weeklyList.updateComicBook(comicBook)
-
-            self.weeklyList = updatedList
-            self.getCurrentList()
+            weeklyList?.updateComicBookSelected(comicBook)
+            
+            getCurrentList()
+            getLeftovers()
         }
     }
     
     func markComicBookPurchased(_ comicBook: ComicBook) {
-        guard let weeklyList,
-              let shoppingList = comicBook.shoppingList ?? currentList else { return }
-
+        guard let shoppingList = comicBook.shoppingList ?? currentList else { return }
+        
         Task {
             guard let _ = try? await ComicBookNetwork.updatePurchaseStatus(
                 for: comicBook,
@@ -128,12 +112,10 @@ class DashboardViewModel: ObservableObject {
             ) else {
                 return
             }
-
-            let updatedList = weeklyList.updateComicBook(comicBook)
-            self.weeklyList = updatedList
-
-            let updatedLeftovers = leftoverList?.updateComicBook(comicBook)
-            self.leftoverList = updatedLeftovers
+            
+            weeklyList?.updateComicBookPurchased(comicBook)
+            currentList?.updateComicBookPurchased(comicBook)
+            leftoverList?.updateComicBookPurchased(comicBook)
         }
     }
 }

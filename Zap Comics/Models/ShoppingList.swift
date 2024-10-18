@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShoppingList: Codable, PurchasableComicBookList, Previewable {
+class ShoppingList: Codable, ComicBookListHandler, Previewable, ObservableObject {
 
     typealias PreviewType = ShoppingList
 
@@ -16,7 +16,7 @@ class ShoppingList: Codable, PurchasableComicBookList, Previewable {
     var id: Int
     var dateString: String
 
-    @Default<Empty> var comicBooks: [ComicBook]
+    @Published var comicBooks: [ComicBook]
     
     var date: Date? {
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -28,9 +28,33 @@ class ShoppingList: Codable, PurchasableComicBookList, Previewable {
         case dateString = "week"
         case comicBooks = "comic_books"
     }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int.self, forKey: .id)
+        dateString = try container.decode(String.self, forKey: .dateString)
+        comicBooks = try container.decode([ComicBook].self, forKey: .comicBooks)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(dateString, forKey: .dateString)
+        try container.encode(comicBooks, forKey: .comicBooks)
+    }
+    
+    init(
+        id: Int,
+        dateString: String,
+        comicBooks: [ComicBook] = []
+    ) {
+        self.id = id
+        self.dateString = dateString
+        self.comicBooks = comicBooks
+    }
 }
 
-class ShoppingListResponse: Codable, Previewable {
+struct ShoppingListResponse: Codable, Previewable {
     typealias PreviewType = ShoppingListResponse
 
     var shoppingList: ShoppingList
