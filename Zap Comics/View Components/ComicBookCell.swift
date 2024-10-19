@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 class ComicBookCellViewModel: ObservableObject {
     @Published var isPurchaseView: Bool = false
+    @Published var isPastListView: Bool = false
 }
 
 struct ComicBookCell: View {
@@ -37,47 +38,53 @@ struct ComicBookCell: View {
                     )
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    HStack(alignment: .center, spacing: 8) {
-                        if viewModel.isPurchaseView {
+                    if viewModel.isPastListView {
+                        Text(comicBook.purchased ? "Purchased" : "Unpurchased")
+                            .font(.caption)
+                            .foregroundStyle(.gray)
+                    } else {
+                        HStack(alignment: .center, spacing: 8) {
+                            if viewModel.isPurchaseView {
+                                Button {
+                                    dashboardVM.markComicBookPurchased(comicBook)
+                                } label: {
+                                    ResizableImage(
+                                        name: "icon-purchase",
+                                        height: 20,
+                                        width: 20,
+                                        contentMode: .fit,
+                                        templateRenderingMode: .template,
+                                        imageColor: comicBook.purchased ? .green : .gray
+                                    )
+                                }
+                            }
+                            
                             Button {
-                                dashboardVM.markComicBookPurchased(comicBook)
+                                dashboardVM.comicBookActionTapped(comicBook, isPurchaseView: viewModel.isPurchaseView)
                             } label: {
-                                ResizableImage(
-                                    name: "icon-purchase",
-                                    height: 20,
-                                    width: 20,
-                                    contentMode: .fit,
-                                    templateRenderingMode: .template,
-                                    imageColor: comicBook.purchased ? .green : .gray
-                                )
+                                if comicBook.selected || viewModel.isPurchaseView {
+                                    ResizableImage(
+                                        name: "icon-remove_comic",
+                                        height: 20,
+                                        width: 20,
+                                        contentMode: .fit,
+                                        templateRenderingMode: .template,
+                                        imageColor: .gray
+                                    )
+                                } else {
+                                    ResizableImage(
+                                        name: "icon-add_comic",
+                                        height: 20,
+                                        width: 20,
+                                        contentMode: .fit,
+                                        templateRenderingMode: .template,
+                                        imageColor: .zapBlue
+                                    )
+                                }
                             }
                         }
-                        
-                        Button {
-                            dashboardVM.comicBookActionTapped(comicBook, isPurchaseView: viewModel.isPurchaseView)
-                        } label: {
-                            if comicBook.selected || viewModel.isPurchaseView {
-                                ResizableImage(
-                                    name: "icon-remove_comic",
-                                    height: 20,
-                                    width: 20,
-                                    contentMode: .fit,
-                                    templateRenderingMode: .template,
-                                    imageColor: .gray
-                                )
-                            } else {
-                                ResizableImage(
-                                    name: "icon-add_comic",
-                                    height: 20,
-                                    width: 20,
-                                    contentMode: .fit,
-                                    templateRenderingMode: .template,
-                                    imageColor: .zapBlue
-                                )
-                            }
-                        }
+                        .padding(.bottom, 8)
                     }
-                    .padding(.bottom, 8)
                     
                     Text(comicBook.price)
                         .font(.footnote)
@@ -127,6 +134,11 @@ struct ComicBookCell: View {
     
     func setPurchaseView() -> Self {
         viewModel.isPurchaseView = true
+        return self
+    }
+    
+    func setPastListView() -> Self {
+        viewModel.isPastListView = true
         return self
     }
 }

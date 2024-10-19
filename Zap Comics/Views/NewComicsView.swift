@@ -18,43 +18,44 @@ struct NewComicsView: View {
                     spacing: 0,
                     pinnedViews: .sectionHeaders
                 ) {
-                        viewModel.weeklyList.map { weeklyList in
-                            ForEach(weeklyList.publishers) { publisher in
-                                Section {
-                                    if viewModel.selectedPublisher == publisher {
-                                        ForEach(publisher.comicBooks) { comicBook in
-                                            ComicBookCell(comicBook: comicBook)
+                    viewModel.weeklyList.map { weeklyList in
+                        ForEach(weeklyList.publishers) { publisher in
+                            Section {
+                                if viewModel.selectedPublisher == publisher {
+                                    ForEach(publisher.comicBooks) { comicBook in
+                                        ComicBookCell(comicBook: comicBook)
+                                    }
+                                }
+                            } header: {
+                                PublisherHeader(publisher: publisher)
+                                    .onTapGesture {
+                                        withAnimation {
+                                            viewModel.select(publisher)
                                         }
                                     }
-                                } header: {
-                                    PublisherHeader(publisher: publisher)
-                                        .onTapGesture {
-                                            withAnimation {
-                                                viewModel.select(publisher)
-                                            }
-                                        }
-                                }
                             }
                         }
                     }
-                    .sheet(
-                        isPresented: $viewModel.showSheet) {
-                            viewModel.selectedComicBook.map { comicBook in
-                                ZStack {
-                                    Color.red.ignoresSafeArea()
+                }
+                .sheet(
+                    isPresented: $viewModel.showSheet) {
+                        viewModel.selectedComicBook.map { comicBook in
+                            ZStack {
+                                Color.red.ignoresSafeArea()
 
-                                    Text(comicBook.titleAndIssue)
-                                }
-                                .onTapGesture {
-                                    viewModel.dismisSheet()
-                                }
+                                Text(comicBook.titleAndIssue)
+                            }
+                            .onTapGesture {
+                                viewModel.dismisSheet()
                             }
                         }
+                    }
             }
             .accessibilityIdentifier(TestingIdentifiers.NewComicsView.newComicsView)
-        },
-             loadingComplete: viewModel.weeklyList != nil
-        )
+        }, loadingComplete: viewModel.weeklyList != nil)
+        .task {
+            viewModel.getWeeklyList()
+        }
     }
 }
 

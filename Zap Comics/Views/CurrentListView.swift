@@ -11,57 +11,63 @@ struct CurrentListView: View {
     @EnvironmentObject var viewModel: DashboardViewModel
     
     var body: some View {
-        EmptyStateView(content: {
-            ScrollView {
-                LazyVStack(
-                    alignment: .leading,
-                    spacing: 0,
-                    pinnedViews: .sectionHeaders
-                ) {
-                    if let currentList = viewModel.currentList,
-                       !currentList.comicBooks.isEmpty {
-                        Section {
-                            ForEach(currentList.comicBooks) { comicBook in
-                                ComicBookCell(comicBook: comicBook)
-                                    .setPurchaseView()
+        LoadableView(content: {
+            EmptyStateView(content: {
+                ScrollView {
+                    LazyVStack(
+                        alignment: .leading,
+                        spacing: 0,
+                        pinnedViews: .sectionHeaders
+                    ) {
+                        if let currentList = viewModel.currentList,
+                           !currentList.comicBooks.isEmpty {
+                            Section {
+                                ForEach(currentList.comicBooks) { comicBook in
+                                    ComicBookCell(comicBook: comicBook)
+                                        .setPurchaseView()
+                                }
+                            } header: {
+                                CurrentListHeader(title: currentList.dateString)
                             }
-                        } header: {
-                            CurrentListHeader(title: currentList.dateString)
+                        }
+                        
+                        if let leftoverList = viewModel.leftoverList,
+                           !leftoverList.comicBooks.isEmpty {
+                            Section {
+                                ForEach(leftoverList.comicBooks) { comicBook in
+                                    ComicBookCell(comicBook: comicBook)
+                                        .setPurchaseView()
+                                }
+                            } header: {
+                                CurrentListHeader(title: "Leftovers")
+                            }
                         }
                     }
-                    
-                    if let leftoverList = viewModel.leftoverList,
-                       !leftoverList.comicBooks.isEmpty {
-                        Section {
-                            ForEach(leftoverList.comicBooks) { comicBook in
-                                ComicBookCell(comicBook: comicBook)
-                                    .setPurchaseView()
+                    .sheet(
+                        isPresented: $viewModel.showSheet) {
+                            viewModel.selectedComicBook.map { comicBook in
+                                ZStack {
+                                    Color.red.ignoresSafeArea()
+                                    
+                                    Text(comicBook.titleAndIssue)
+                                }
+                                .onTapGesture {
+                                    viewModel.dismisSheet()
+                                }
                             }
-                        } header: {
-                            CurrentListHeader(title: "Leftovers")
                         }
-                    }
                 }
-                .sheet(
-                    isPresented: $viewModel.showSheet) {
-                        viewModel.selectedComicBook.map { comicBook in
-                            ZStack {
-                                Color.red.ignoresSafeArea()
-                                
-                                Text(comicBook.titleAndIssue)
-                            }
-                            .onTapGesture {
-                                viewModel.dismisSheet()
-                            }
-                        }
-                    }
-            }
-            
-        },
-            message: "You haven't added anything from this week's list.",
-            dataPresent: !viewModel.currentListViewEmpty
-        )
-        .accessibilityIdentifier(TestingIdentifiers.CurrentListView.currentListView)
+                
+            },
+               message: "You haven't added anything from this week's list.",
+               dataPresent: !viewModel.currentListViewEmpty
+            )
+            .accessibilityIdentifier(TestingIdentifiers.CurrentListView.currentListView)
+        }, loadingComplete: viewModel.currentList != nil)
+        .task {
+            viewModel.getCurrentList()
+            viewModel.getLeftovers()
+        }
     }
 }
 

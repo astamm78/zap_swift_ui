@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShoppingList: Codable, ComicBookListHandler, Previewable, ObservableObject {
+class ShoppingList: Codable, ComicBookListHandler, Previewable, ObservableObject, Identifiable {
 
     typealias PreviewType = ShoppingList
 
@@ -61,5 +61,13 @@ struct ShoppingListResponse: Codable, Previewable {
     
     private enum CodingKeys: String, CodingKey {
         case shoppingList = "shopping_list"
+    }
+}
+
+struct ShoppingListCollectionResponse: Codable {
+    var shoppingLists: [ShoppingList]
+    
+    private enum CodingKeys: String, CodingKey {
+        case shoppingLists = "shopping_lists"
     }
 }

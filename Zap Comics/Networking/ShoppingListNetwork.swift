@@ -24,4 +24,10 @@ class ShoppingListNetwork: ZapNetwork {
         return leftoverList
     }
     
+    static func getPastLists() async throws -> ShoppingListCollectionResponse {
+        let response = try await service.get("/shopping_lists/past_lists")
+        
+        let pastListsResponse: ShoppingListCollectionResponse = try handleResponse(response)
+        return pastListsResponse
+    }
 }

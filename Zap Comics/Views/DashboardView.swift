@@ -76,10 +76,6 @@ struct DashboardView: View {
             
             ZapTabNav(dashboardTab: .storeFinder).tag(DashboardTab.storeFinder)
         }
-        .task {
-            dashboardVM.getWeeklyList()
-            dashboardVM.getCurrentList()
-        }
     }
 }
 

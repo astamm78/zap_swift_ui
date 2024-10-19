@@ -16,6 +16,7 @@ class DashboardViewModel: ObservableObject {
     @Published var weeklyList: WeeklyList?
     @Published var currentList: ShoppingList?
     @Published var leftoverList: LeftoverList?
+    @Published var pastLists: [ShoppingList]?
 
     @Published var selectedTab: DashboardTab = .newComics
     
@@ -59,6 +60,17 @@ class DashboardViewModel: ObservableObject {
             do {
                 let leftoverList = try await ShoppingListNetwork.getLeftovers()
                 self.leftoverList = leftoverList
+            } catch {
+                print(String(describing: error))
+            }
+        }
+    }
+    
+    func getPastLists() {
+        Task {
+            do {
+                let pastListsResponse = try await ShoppingListNetwork.getPastLists()
+                self.pastLists = pastListsResponse.shoppingLists
             } catch {
                 print(String(describing: error))
             }
