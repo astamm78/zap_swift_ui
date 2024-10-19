@@ -26,7 +26,7 @@ extension Zap_ComicsApp {
         let args = CommandLine.arguments
 
         if args.contains(UITestArguments.loggedOut) {
-            User.clearCurrentUser()
+            User.clearCurrent()
         }
 
         if args.contains(UITestArguments.loggedIn) {

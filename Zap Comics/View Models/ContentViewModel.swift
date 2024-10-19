@@ -31,7 +31,8 @@ class ContentViewModel: ObservableObject {
     }
     
     func logOut() {
-        UserDefaults.standard.removeObject(forKey: User.curentUserKey)
+        User.clearCurrent()
+        WeeklyList.clearCurrent()
         
         loginName = ""
         loginPassword = ""

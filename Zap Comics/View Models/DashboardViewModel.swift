@@ -27,10 +27,16 @@ class DashboardViewModel: ObservableObject {
     }
     
     func getWeeklyList() {
+        guard WeeklyList.timeToRefresh else {
+            self.weeklyList = WeeklyList.current
+            return
+        }
+        
         Task {
             do {
                 let weeklyListResponse = try await WeeklyListNetwork.getWeeklyList()
                 self.weeklyList = weeklyListResponse.weeklyList
+                weeklyListResponse.weeklyList.save()
             } catch {
                 print(String(describing: error))
             }
@@ -96,6 +102,7 @@ class DashboardViewModel: ObservableObject {
                 let _ = try await ComicBookNetwork.addComicBookToList(comicBook)
                 
                 weeklyList?.updateComicBookSelected(comicBook)
+                weeklyList?.save()
                 
                 getCurrentList()
                 getLeftovers()
@@ -111,6 +118,7 @@ class DashboardViewModel: ObservableObject {
                 let _ = try await ComicBookNetwork.removeComicBookFromList(comicBook)
                 
                 weeklyList?.updateComicBookSelected(comicBook)
+                weeklyList?.save()
                 
                 getCurrentList()
                 getLeftovers()
@@ -132,6 +140,8 @@ class DashboardViewModel: ObservableObject {
                 )
                 
                 weeklyList?.updateComicBookPurchased(comicBook)
+                weeklyList?.save()
+                
                 currentList?.updateComicBookPurchased(comicBook)
                 leftoverList?.updateComicBookPurchased(comicBook)
             } catch {

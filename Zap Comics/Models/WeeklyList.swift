@@ -7,8 +7,9 @@
 
 import Foundation
 
-class WeeklyList: Codable, Previewable, ObservableObject {
+class WeeklyList: Codable, Previewable, DefaultsSaveable, ObservableObject {
 
+    typealias SaveType = WeeklyList
     typealias PreviewType = WeeklyList
 
     let dateFormatter = DateFormatter()
@@ -20,6 +21,19 @@ class WeeklyList: Codable, Previewable, ObservableObject {
     var date: Date? {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.date(from: dateString)
+    }
+    
+    static var timeToRefresh: Bool {
+        guard let lastSavedList = WeeklyList.current,
+              let lastSavedListDate = lastSavedList.date,
+              let firstDayOfNewWeek = Calendar.current.date(byAdding: .day, value: 1, to: lastSavedListDate),
+              let dayOfYearValue = Calendar.current.ordinality(of: .day, in: .year, for: firstDayOfNewWeek) else {
+            
+            return true
+        }
+        
+        
+        return dayOfYearValue == Calendar.current.ordinality(of: .day, in: .year, for: Date())
     }
     
     private enum CodingKeys: String, CodingKey {
