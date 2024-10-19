@@ -11,9 +11,10 @@ struct ZapContainer<Content: View>: View {
     @ViewBuilder var content: Content
     
     var backgroundColor: Color = Color.zapYellow
+    var alignment: Alignment = .center
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: alignment) {
             backgroundColor
                 .ignoresSafeArea()
             

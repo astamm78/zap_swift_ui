@@ -25,7 +25,7 @@ struct ComicBookCell: View {
                 .foregroundStyle(.gray)
                 .frame(height: 0.6)
             
-            HStack(alignment: .center, spacing: 12) {
+            HStack(alignment: .top, spacing: 12) {
                 WebImage(url: comicBook.imageURL)
                     .resizable()
                     .frame(width: 90, height: 135)
@@ -94,6 +94,9 @@ struct ComicBookCell: View {
                     Text(comicBook.titleAndIssue)
                         .fontWeight(.bold)
                         .foregroundStyle(.gray)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
                     
                     comicBook.shoppingList.map { shoppingList in
                         Text(shoppingList.dateString)
@@ -116,7 +119,6 @@ struct ComicBookCell: View {
                 Spacer()
             }
             .padding()
-            .frame(height: 160)
             .background(
                 LinearGradient(
                     colors: [.gray.opacity(0.25), .white],

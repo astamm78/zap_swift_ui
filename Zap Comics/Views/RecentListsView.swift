@@ -31,6 +31,12 @@ struct RecentListsView: View {
                                 }
                             }
                         }
+                        .sheet(
+                            isPresented: $viewModel.showSheet) {
+                                viewModel.selectedComicBook.map { comicBook in
+                                    ComicBookDetailView(comicBook: comicBook)
+                                }
+                            }
                 }
             }, message: "You don't have any recent lists.", dataPresent: viewModel.pastLists != nil)
         }, loadingComplete: viewModel.pastLists != nil)

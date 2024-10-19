@@ -40,14 +40,7 @@ struct NewComicsView: View {
                 .sheet(
                     isPresented: $viewModel.showSheet) {
                         viewModel.selectedComicBook.map { comicBook in
-                            ZStack {
-                                Color.red.ignoresSafeArea()
-
-                                Text(comicBook.titleAndIssue)
-                            }
-                            .onTapGesture {
-                                viewModel.dismisSheet()
-                            }
+                            ComicBookDetailView(comicBook: comicBook)
                         }
                     }
             }
