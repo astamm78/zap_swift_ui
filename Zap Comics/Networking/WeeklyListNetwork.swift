@@ -10,12 +10,12 @@ import Networking
 
 class WeeklyListNetwork: ZapNetwork {
     
-    static func getWeeklyList() async throws -> WeeklyListResponse? {
+    static func getWeeklyList() async throws -> WeeklyListResponse {
         let response = try await service.get(
             "/weekly_lists/current/by_publisher"
         )
         
-        let weeklyListResponse: WeeklyListResponse? = handleResponse(response)
+        let weeklyListResponse: WeeklyListResponse = try handleResponse(response)
         return weeklyListResponse
     }
 }

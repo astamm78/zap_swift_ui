@@ -10,17 +10,17 @@ import Networking
 
 class ShoppingListNetwork: ZapNetwork {
     
-    static func getShoppingList() async throws -> ShoppingListResponse? {
+    static func getShoppingList() async throws -> ShoppingListResponse {
         let response = try await service.get("/shopping_lists/current")
         
-        let shoppingListResponse: ShoppingListResponse? = handleResponse(response)
+        let shoppingListResponse: ShoppingListResponse = try handleResponse(response)
         return shoppingListResponse
     }
     
-    static func getLeftovers() async throws -> LeftoverList? {
+    static func getLeftovers() async throws -> LeftoverList {
         let response = try await service.get("/shopping_lists/leftover")
         
-        let leftoverList: LeftoverList? = handleResponse(response)
+        let leftoverList: LeftoverList = try handleResponse(response)
         return leftoverList
     }
     

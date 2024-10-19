@@ -17,34 +17,45 @@ class DashboardViewModel: ObservableObject {
     @Published var currentList: ShoppingList?
     @Published var leftoverList: LeftoverList?
 
-    @Published var currentListViewEmpty: Bool = false
-    
     @Published var selectedTab: DashboardTab = .newComics
+    
+    var currentListViewEmpty: Bool {
+        let shoppingListEmpty = currentList?.comicBooks.isEmpty ?? true
+        let leftoverListEmpty = leftoverList?.comicBooks.isEmpty ?? true
+        
+        return shoppingListEmpty && leftoverListEmpty
+    }
     
     func getWeeklyList() {
         Task {
-            guard let weeklyListResponse = try? await WeeklyListNetwork.getWeeklyList() else { return }
-            
-            self.weeklyList = weeklyListResponse.weeklyList
+            do {
+                let weeklyListResponse = try await WeeklyListNetwork.getWeeklyList()
+                self.weeklyList = weeklyListResponse.weeklyList
+            } catch {
+                print(String(describing: error))
+            }
         }
     }
     
     func getCurrentList() {
         Task {
-            guard let currentList = try? await ShoppingListNetwork.getShoppingList() else { return }
-            
-            self.currentList = currentList.shoppingList
+            do {
+                let currentList = try await ShoppingListNetwork.getShoppingList()
+                self.currentList = currentList.shoppingList
+            } catch {
+                print(String(describing: error))
+            }
         }
     }
     
     func getLeftovers() {
         Task {
-            guard let leftoverList = try? await ShoppingListNetwork.getLeftovers() else {
-                self.leftoverList = nil
-                return
+            do {
+                let leftoverList = try await ShoppingListNetwork.getLeftovers()
+                self.leftoverList = leftoverList
+            } catch {
+                print(String(describing: error))
             }
-            
-            self.leftoverList = leftoverList
         }
     }
     
@@ -81,23 +92,31 @@ class DashboardViewModel: ObservableObject {
     
     func addComicBookToList(_ comicBook: ComicBook) {
         Task {
-            guard let _ = try? await ComicBookNetwork.addComicBookToList(comicBook) else { return }
-        
-            weeklyList?.updateComicBookSelected(comicBook)
-            
-            getCurrentList()
-            getLeftovers()
+            do {
+                let _ = try await ComicBookNetwork.addComicBookToList(comicBook)
+                
+                weeklyList?.updateComicBookSelected(comicBook)
+                
+                getCurrentList()
+                getLeftovers()
+            } catch {
+                print(String(describing: error))
+            }
         }
     }
     
     func removeComicBookFromList(_ comicBook: ComicBook) {
         Task {
-            guard let _ = try? await ComicBookNetwork.removeComicBookFromList(comicBook) else { return }
-            
-            weeklyList?.updateComicBookSelected(comicBook)
-            
-            getCurrentList()
-            getLeftovers()
+            do {
+                let _ = try await ComicBookNetwork.removeComicBookFromList(comicBook)
+                
+                weeklyList?.updateComicBookSelected(comicBook)
+                
+                getCurrentList()
+                getLeftovers()
+            } catch {
+                print(String(describing: error))
+            }
         }
     }
     
@@ -105,17 +124,19 @@ class DashboardViewModel: ObservableObject {
         guard let shoppingList = comicBook.shoppingList ?? currentList else { return }
         
         Task {
-            guard let _ = try? await ComicBookNetwork.updatePurchaseStatus(
-                for: comicBook,
-                and: shoppingList,
-                purchased: !comicBook.purchased
-            ) else {
-                return
+            do {
+                let _ = try await ComicBookNetwork.updatePurchaseStatus(
+                    for: comicBook,
+                    and: shoppingList,
+                    purchased: !comicBook.purchased
+                )
+                
+                weeklyList?.updateComicBookPurchased(comicBook)
+                currentList?.updateComicBookPurchased(comicBook)
+                leftoverList?.updateComicBookPurchased(comicBook)
+            } catch {
+                print(String(describing: error))
             }
-            
-            weeklyList?.updateComicBookPurchased(comicBook)
-            currentList?.updateComicBookPurchased(comicBook)
-            leftoverList?.updateComicBookPurchased(comicBook)
         }
     }
 }

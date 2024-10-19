@@ -10,7 +10,7 @@ import Networking
 
 class SessionsNetwork: ZapNetwork {
     
-    static func login(with username: String, and password: String) async throws -> UserResponse? {
+    static func login(with username: String, and password: String) async throws -> UserResponse {
         let response = try await service.post(
             "/sessions",
             parameterType: .json,
@@ -22,11 +22,11 @@ class SessionsNetwork: ZapNetwork {
             ]
         )
         
-        let userResponse: UserResponse? = handleResponse(response)
+        let userResponse: UserResponse = try handleResponse(response)
         return userResponse
     }
     
-    static func register(with username: String, and password: String) async throws -> UserResponse? {
+    static func register(with username: String, and password: String) async throws -> UserResponse {
         let response = try await service.post(
             "/users",
             parameterType: .json,
@@ -38,7 +38,7 @@ class SessionsNetwork: ZapNetwork {
             ]
         )
          
-        let userResponse: UserResponse? = handleResponse(response)
+        let userResponse: UserResponse = try handleResponse(response)
         return userResponse
     }
     

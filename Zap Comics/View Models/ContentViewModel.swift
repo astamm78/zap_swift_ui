@@ -16,15 +16,17 @@ class ContentViewModel: ObservableObject {
     
     func login() {
         Task {
-            guard let userResponse = try? await SessionsNetwork.login(
-                with: self.loginName,
-                and: self.loginPassword
-            ) else {
-                return
+            do {
+                let userResponse = try await SessionsNetwork.login(
+                    with: self.loginName,
+                    and: self.loginPassword
+                )
+                
+                userResponse.user.save()
+                self.currentUser = userResponse.user
+            } catch {
+                print(String(describing: error))
             }
-            
-            userResponse.user.save()
-            self.currentUser = userResponse.user
         }
     }
     
@@ -38,15 +40,17 @@ class ContentViewModel: ObservableObject {
     
     func register() {
         Task {
-            guard let userResponse = try? await SessionsNetwork.register(
-                with: self.loginName,
-                and: self.loginPassword
-            ) else {
-                return
+            do {
+                let userResponse = try await SessionsNetwork.register(
+                    with: self.loginName,
+                    and: self.loginPassword
+                )
+                
+                userResponse.user.save()
+                self.currentUser = userResponse.user
+            } catch {
+                print(String(describing: error))
             }
-            
-            userResponse.user.save()
-            self.currentUser = userResponse.user
         }
     }
     

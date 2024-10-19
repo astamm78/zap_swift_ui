@@ -39,6 +39,7 @@ struct EmptyStateView<Content: View>: View {
         },
             backgroundColor: .gray
         )
+        .grayscale(1.0)
     }
 }
 

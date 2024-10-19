@@ -76,7 +76,8 @@ struct CurrentListView: View {
 
 #Preview("Empty State") {
     let vm = DashboardViewModel()
-    vm.currentListViewEmpty = true
+    vm.currentList = nil
+    vm.leftoverList = nil
 
     return CurrentListView()
         .environmentObject(vm)
