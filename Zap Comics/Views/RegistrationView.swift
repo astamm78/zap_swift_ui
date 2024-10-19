@@ -10,6 +10,8 @@ import SwiftUI
 struct RegistrationView: View {
     @EnvironmentObject var viewModel: ContentViewModel
     
+    @State var showPrivacyPolicy: Bool = false
+    
     var body: some View {
         NavigationView {
             ZapContainer {
@@ -41,8 +43,33 @@ struct RegistrationView: View {
                         label: "Sign Up"
                     )
                     .accessibilityIdentifier(TestingIdentifiers.RegistrationView.registerButton)
+                    
+                    Button("Privacy Policy") {
+                        showPrivacyPolicy.toggle()
+                    }
+                    .foregroundStyle(.zapBlue)
+                    
                 }
                 .padding()
+                .fullScreenCover(isPresented: $showPrivacyPolicy) {
+                    ZStack {
+                        VStack(spacing: 20) {
+                            HStack {
+                                Button {
+                                    showPrivacyPolicy.toggle()
+                                } label: {
+                                    Image(systemName: "chevron.down")
+                                        .foregroundStyle(.zapBlue)
+                                }
+
+                                Spacer()
+                            }
+                            
+                            WebView(url: URL(string: "https://zap-list.com/privacy")!)
+                        }
+                        .padding(20)
+                    }
+                }
             }
         }
     }
