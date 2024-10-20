@@ -91,6 +91,7 @@ struct DashboardView: View {
                 .onAppear {
                     dashboardVM.selectedTab = .storeFinder
                 }
+                .environmentObject(MapViewModel.shared)
         }
     }
 }

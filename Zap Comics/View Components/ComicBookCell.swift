@@ -25,7 +25,7 @@ struct ComicBookCell: View {
                 .foregroundStyle(.gray)
                 .frame(height: 0.6)
             
-            HStack(alignment: .top, spacing: 12) {
+        HStack(alignment: .top, spacing: 12) {
                 WebImage(url: comicBook.imageURL)
                     .resizable()
                     .frame(width: 90, height: 135)
