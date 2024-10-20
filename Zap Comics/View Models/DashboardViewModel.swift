@@ -38,8 +38,8 @@ class DashboardViewModel: ObservableObject {
         }
     }
     
-    func getWeeklyList() {
-        guard WeeklyList.timeToRefresh else {
+    func getWeeklyList(force: Bool = false) {
+        guard force || WeeklyList.timeToRefresh else {
             self.weeklyList = WeeklyList.current
             return
         }

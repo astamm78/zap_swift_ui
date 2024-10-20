@@ -38,6 +38,10 @@ struct RecentListsView: View {
                                 }
                             }
                 }
+                .refreshable {
+                    viewModel.pastLists = nil
+                    viewModel.getPastLists()
+                }
             }, message: "You don't have any recent lists.", dataPresent: viewModel.pastLists != nil)
         }, loadingComplete: viewModel.pastLists != nil)
     }

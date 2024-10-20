@@ -44,13 +44,20 @@ struct CurrentListView: View {
                         }
                     }
                     .sheet(
-                        isPresented: $viewModel.showSheet) {
-                            viewModel.selectedComicBook.map { comicBook in
-                                ComicBookDetailView(comicBook: comicBook)
-                            }
+                        isPresented: $viewModel.showSheet
+                    ) {
+                        viewModel.selectedComicBook.map { comicBook in
+                            ComicBookDetailView(comicBook: comicBook)
                         }
+                    }
                 }
-                
+                .refreshable {
+                    viewModel.currentList = nil
+                    viewModel.pastLists = nil
+                    
+                    viewModel.getCurrentList()
+                    viewModel.getPastLists()
+                }                
             },
                message: "You haven't added anything from this week's list.",
                dataPresent: !viewModel.currentListViewEmpty

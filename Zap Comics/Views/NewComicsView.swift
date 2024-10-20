@@ -45,6 +45,10 @@ struct NewComicsView: View {
                     }
             }
             .accessibilityIdentifier(TestingIdentifiers.NewComicsView.newComicsView)
+            .refreshable {
+                viewModel.weeklyList = nil
+                viewModel.getWeeklyList(force: true)
+            }
         }, loadingComplete: viewModel.weeklyList != nil)
     }
 }
