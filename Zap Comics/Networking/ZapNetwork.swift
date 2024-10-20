@@ -42,9 +42,11 @@ class ZapNetwork {
                 let responseObject: T = try JSONDecoder().decode(T.self, from: data)
                 return responseObject
             } catch {
+                print(String(describing: T.self))
                 throw ZapNetworkError.malformedJSON(class: String(describing: T.self))
             }
         case .failure(let failureJSONResponse):
+            print(String(describing: failureJSONResponse.error))
             throw ZapNetworkError.networkError(message: String(describing: failureJSONResponse.error))
         }
     }

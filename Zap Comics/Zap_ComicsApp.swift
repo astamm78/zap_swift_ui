@@ -16,7 +16,7 @@ struct Zap_ComicsApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(ContentViewModel())
+                .environmentObject(ContentViewModel.shared)
         }
     }
 }

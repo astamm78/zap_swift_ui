@@ -20,6 +20,15 @@ class DashboardViewModel: ObservableObject {
 
     @Published var selectedTab: DashboardTab = .newComics
     
+    private var lastFetchTime_currentList: Date?
+    private var lastFetchTime_leftoverList: Date?
+    private var lastFetchTime_pastLists: Date?
+    
+    // 5-minute interval constant in seconds
+    private let fetchInterval: TimeInterval = 300
+    
+    static var shared: DashboardViewModel = DashboardViewModel()
+    
     var currentListViewEmpty: Bool {
         let shoppingListEmpty = currentList?.comicBooks.isEmpty ?? true
         let leftoverListEmpty = leftoverList?.comicBooks.isEmpty ?? true
@@ -45,10 +54,19 @@ class DashboardViewModel: ObservableObject {
     }
     
     func getCurrentList() {
+        let currentTime = Date()
+
+        // Check if the last fetch was more than 5 minutes ago
+        if let lastFetchTime_currentList, currentTime.timeIntervalSince(lastFetchTime_currentList) < fetchInterval {
+            print("Data fetched recently, not making a new API call.")
+            return
+        }
+        
         Task {
             do {
                 let currentList = try await ShoppingListNetwork.getShoppingList()
                 self.currentList = currentList.shoppingList
+                self.lastFetchTime_currentList = Date()
             } catch {
                 print(String(describing: error))
             }
@@ -56,10 +74,19 @@ class DashboardViewModel: ObservableObject {
     }
     
     func getLeftovers() {
+        let currentTime = Date()
+
+        // Check if the last fetch was more than 5 minutes ago
+        if let lastFetchTime_leftoverList, currentTime.timeIntervalSince(lastFetchTime_leftoverList) < fetchInterval {
+            print("Data fetched recently, not making a new API call.")
+            return
+        }
+        
         Task {
             do {
                 let leftoverList = try await ShoppingListNetwork.getLeftovers()
                 self.leftoverList = leftoverList
+                self.lastFetchTime_leftoverList = Date()
             } catch {
                 print(String(describing: error))
             }
@@ -67,10 +94,19 @@ class DashboardViewModel: ObservableObject {
     }
     
     func getPastLists() {
+        let currentTime = Date()
+
+        // Check if the last fetch was more than 5 minutes ago
+        if let lastFetchTime_pastLists, currentTime.timeIntervalSince(lastFetchTime_pastLists) < fetchInterval {
+            print("Data fetched recently, not making a new API call.")
+            return
+        }
+        
         Task {
             do {
                 let pastListsResponse = try await ShoppingListNetwork.getPastLists()
                 self.pastLists = pastListsResponse.shoppingLists
+                self.lastFetchTime_pastLists = Date()
             } catch {
                 print(String(describing: error))
             }

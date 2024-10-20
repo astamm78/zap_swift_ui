@@ -14,6 +14,8 @@ class ContentViewModel: ObservableObject {
     @Published var loginName: String = ""
     @Published var loginPassword: String = ""
     
+    static var shared: ContentViewModel = ContentViewModel()
+    
     func login() {
         Task {
             do {

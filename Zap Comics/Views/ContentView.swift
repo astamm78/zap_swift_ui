@@ -13,7 +13,7 @@ struct ContentView: View {
     var body: some View {
         if let _ = viewModel.currentUser {
             DashboardView()
-                .environmentObject(DashboardViewModel())
+                .environmentObject(DashboardViewModel.shared)
         } else {
             LoginView()
         }

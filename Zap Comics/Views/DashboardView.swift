@@ -68,13 +68,29 @@ struct DashboardView: View {
     
     var body: some View {
         TabView(selection: $dashboardVM.selectedTab) {
-            ZapTabNav(dashboardTab: .newComics).tag(DashboardTab.newComics)
+            ZapTabNav(dashboardTab: .newComics)
+                .tag(DashboardTab.newComics)
+                .onAppear {
+                    dashboardVM.selectedTab = .newComics
+                }
 
-            ZapTabNav(dashboardTab: .currentList).tag(DashboardTab.currentList)
+            ZapTabNav(dashboardTab: .currentList)
+                .tag(DashboardTab.currentList)
+                .onAppear {
+                    dashboardVM.selectedTab = .currentList
+                }
 
-            ZapTabNav(dashboardTab: .recentLists).tag(DashboardTab.recentLists)
+            ZapTabNav(dashboardTab: .recentLists)
+                .tag(DashboardTab.recentLists)
+                .onAppear {
+                    dashboardVM.selectedTab = .recentLists
+                }
             
-            ZapTabNav(dashboardTab: .storeFinder).tag(DashboardTab.storeFinder)
+            ZapTabNav(dashboardTab: .storeFinder)
+                .tag(DashboardTab.storeFinder)
+                .onAppear {
+                    dashboardVM.selectedTab = .storeFinder
+                }
         }
     }
 }
