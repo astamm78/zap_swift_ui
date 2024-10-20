@@ -42,10 +42,12 @@ struct ComicBookDetailView: View {
                         .fontWeight(.ultraLight)
                     
                     comicBook.description.map { description in
-                        Text(description)
-                            .multilineTextAlignment(.leading)
-                            .font(.system(size: 14.0, weight: .regular, design: .default))
-                            .fontWeight(.light)
+                        ScrollView {
+                            Text(description)
+                                .multilineTextAlignment(.leading)
+                                .font(.system(size: 14.0, weight: .regular, design: .default))
+                                .fontWeight(.light)
+                        }
                     }
                     
                     comicBook.imageURL.map { imageURL in
