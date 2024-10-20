@@ -43,6 +43,16 @@ struct ZapTabNav: View {
                 }
                 .navigationBarItems(
                     leading: Menu(content: {
+                        User.current.map { currentUser in
+                            Group {
+                                Text("You've made \(currentUser.shoppingListCount ?? 0) lists.")
+                                
+                                Text("You've added \(currentUser.comicBooksCount ?? 0) comic books to your lists…")
+                                
+                                Text("…and purchased \(currentUser.purchasedComicBookCount ?? 0) of them!")
+                            }
+                        }
+                        
                         Button {
                             contentVM.logOut()
                         } label: {
