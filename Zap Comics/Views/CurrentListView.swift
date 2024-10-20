@@ -57,10 +57,6 @@ struct CurrentListView: View {
             )
             .accessibilityIdentifier(TestingIdentifiers.CurrentListView.currentListView)
         }, loadingComplete: viewModel.currentList != nil)
-        .task {
-            viewModel.getCurrentList()
-            viewModel.getLeftovers()
-        }
     }
 }
 

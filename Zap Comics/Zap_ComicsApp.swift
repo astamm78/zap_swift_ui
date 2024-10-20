@@ -11,6 +11,12 @@ import SwiftUI
 struct Zap_ComicsApp: App {
     init() {
         configureForUITesting()
+        
+        if let _ = User.current {
+            Task {
+                await Application.bootstrap()                
+            }
+        }
     }
 
     var body: some Scene {

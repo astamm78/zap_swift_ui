@@ -46,9 +46,6 @@ struct NewComicsView: View {
             }
             .accessibilityIdentifier(TestingIdentifiers.NewComicsView.newComicsView)
         }, loadingComplete: viewModel.weeklyList != nil)
-        .task {
-            viewModel.getWeeklyList()
-        }
     }
 }
 

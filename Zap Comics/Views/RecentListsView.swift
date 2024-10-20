@@ -40,9 +40,6 @@ struct RecentListsView: View {
                 }
             }, message: "You don't have any recent lists.", dataPresent: viewModel.pastLists != nil)
         }, loadingComplete: viewModel.pastLists != nil)
-        .task {
-            viewModel.getPastLists()
-        }
     }
 }
 

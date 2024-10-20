@@ -26,6 +26,7 @@ class ContentViewModel: ObservableObject {
                 
                 userResponse.user.save()
                 self.currentUser = userResponse.user
+                await Application.bootstrap()
             } catch {
                 print(String(describing: error))
             }
@@ -51,6 +52,7 @@ class ContentViewModel: ObservableObject {
                 
                 userResponse.user.save()
                 self.currentUser = userResponse.user
+                await Application.bootstrap()
             } catch {
                 print(String(describing: error))
             }
