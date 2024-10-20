@@ -20,11 +20,11 @@ struct ZapTabNav: View {
         coloredNavAppearance.configureWithOpaqueBackground()
         coloredNavAppearance.backgroundColor = .zapYellow
         coloredNavAppearance.titleTextAttributes = [
-            .foregroundColor: UIColor.white
+            .foregroundColor: UIColor.black
         ]
 
         coloredNavAppearance.largeTitleTextAttributes = [
-            .foregroundColor: UIColor.white
+            .foregroundColor: UIColor.black
         ]
 
         UINavigationBar.appearance().standardAppearance = coloredNavAppearance

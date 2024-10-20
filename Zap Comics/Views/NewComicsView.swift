@@ -10,46 +10,73 @@ import SwiftUI
 struct NewComicsView: View {
     @EnvironmentObject var viewModel: DashboardViewModel
     
+    private var searchResults: [ComicBook] {
+        guard !viewModel.searchText.isEmpty else {
+            return []
+        }
+        
+        return viewModel.weeklyList?.filterContentForSearchText(viewModel.searchText) ?? []
+    }
+    
     var body: some View {
-        LoadableView(content: {
-            ScrollView {
-                LazyVStack(
-                    alignment: .leading,
-                    spacing: 0,
-                    pinnedViews: .sectionHeaders
-                ) {
-                    viewModel.weeklyList.map { weeklyList in
-                        ForEach(weeklyList.publishers) { publisher in
-                            Section {
-                                if viewModel.selectedPublisher == publisher {
-                                    ForEach(publisher.comicBooks) { comicBook in
-                                        ComicBookCell(comicBook: comicBook)
-                                    }
-                                }
-                            } header: {
-                                PublisherHeader(publisher: publisher)
-                                    .onTapGesture {
-                                        withAnimation {
-                                            viewModel.select(publisher)
-                                        }
-                                    }
+        NavigationStack {
+            LoadableView(content: {
+                ScrollView {
+                    LazyVStack(
+                        alignment: .leading,
+                        spacing: 0,
+                        pinnedViews: .sectionHeaders
+                    ) {
+                        if searchResults.isEmpty {
+                            publisherView
+                        } else {
+                            searchResultsView
+                        }
+                    }
+                    .sheet(
+                        isPresented: $viewModel.showSheet) {
+                            viewModel.selectedComicBook.map { comicBook in
+                                ComicBookDetailView(comicBook: comicBook)
                             }
                         }
-                    }
                 }
-                .sheet(
-                    isPresented: $viewModel.showSheet) {
-                        viewModel.selectedComicBook.map { comicBook in
-                            ComicBookDetailView(comicBook: comicBook)
+                .accessibilityIdentifier(TestingIdentifiers.NewComicsView.newComicsView)
+                .refreshable {
+                    viewModel.weeklyList = nil
+                    viewModel.getWeeklyList(force: true)
+                }
+            }, loadingComplete: viewModel.weeklyList != nil)
+            .navigationTitle(viewModel.weeklyList?.dateDisplay ?? "")
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .searchable(text: $viewModel.searchText)
+    }
+    
+    var publisherView: some View {
+        viewModel.weeklyList.map { weeklyList in
+            ForEach(weeklyList.publishers) { publisher in
+                Section {
+                    if viewModel.selectedPublisher == publisher {
+                        ForEach(publisher.comicBooks) { comicBook in
+                            ComicBookCell(comicBook: comicBook)
                         }
                     }
+                } header: {
+                    PublisherHeader(publisher: publisher)
+                        .onTapGesture {
+                            withAnimation {
+                                viewModel.select(publisher)
+                            }
+                        }
+                }
             }
-            .accessibilityIdentifier(TestingIdentifiers.NewComicsView.newComicsView)
-            .refreshable {
-                viewModel.weeklyList = nil
-                viewModel.getWeeklyList(force: true)
-            }
-        }, loadingComplete: viewModel.weeklyList != nil)
+        }
+    }
+    
+    var searchResultsView: some View {
+        ForEach(searchResults) { comicBook in
+            ComicBookCell(comicBook: comicBook)
+        }
     }
 }
 

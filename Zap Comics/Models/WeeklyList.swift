@@ -23,6 +23,19 @@ class WeeklyList: Codable, Previewable, DefaultsSaveable, ObservableObject {
         return dateFormatter.date(from: dateString)
     }
     
+    var dateDisplay: String? {
+        guard let date else { return nil }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+
+        return dateFormatter.string(from: date)
+    }
+    
+    var allComicBooks: [ComicBook] {
+        publishers.map({ $0.comicBooks }).flatMap({ $0 })
+    }
+    
     static var timeToRefresh: Bool {
         guard let lastSavedList = WeeklyList.current,
               let lastSavedListDate = lastSavedList.date,
@@ -65,6 +78,12 @@ class WeeklyList: Codable, Previewable, DefaultsSaveable, ObservableObject {
     func updateComicBookPurchased(_ comicBook: ComicBook) {
         for publisher in publishers {
             publisher.updateComicBookPurchased(comicBook)
+        }
+    }
+    
+    func filterContentForSearchText(_ searchText: String) -> [ComicBook] {
+        return allComicBooks.filter { comicBook in
+            return comicBook.titleAndIssue.lowercased().contains(searchText.lowercased())
         }
     }
     

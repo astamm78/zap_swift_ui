@@ -25,7 +25,7 @@ struct PublisherHeader: View {
                     .frame(width: 45, height: 45, alignment: .center)
                     .clipped()
                 
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(publisher.name)
                         .fontWeight(.bold)
                         .foregroundStyle(.gray)
@@ -39,7 +39,7 @@ struct PublisherHeader: View {
                 Spacer()
             }
             .padding()
-            .frame(height: 60)
+            .frame(height: 80)
             .background(
                 LinearGradient(
                     colors: [.gray.opacity(0.25), .white],

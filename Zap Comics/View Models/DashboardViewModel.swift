@@ -20,6 +20,8 @@ class DashboardViewModel: ObservableObject {
 
     @Published var selectedTab: DashboardTab = .newComics
     
+    @Published var searchText = ""
+    
     static var shared: DashboardViewModel = DashboardViewModel()
     
     var currentListViewEmpty: Bool {
