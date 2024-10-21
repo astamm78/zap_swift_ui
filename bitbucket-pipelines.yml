@@ -1,0 +1,11 @@
+pipelines:
+  custom:
+    deploy_firebase_version:
+      - step:
+          runs-on:
+            - self.hosted
+            - macos
+          script:
+            - xcodebuild -workspace YOUR-APP-WORKSPACE.xcworkspace -scheme YOUR-SCHEME -archivePath build/version/app.xcarchive archive
+            - xcodebuild -exportArchive -archivePath build/version/app.xcarchive -exportPath build/version -exportOptionsPlist ci/profile/export.plist
+            - firebase appdistribution:distribute IPA-PATH --app FIREBASE-APPLICATION-ID --release-notes-file ci/releasenote.txt --groups-file ci/groups.txt  --testers-file ci/testers.txt --token FIREBASE-TOKEN
