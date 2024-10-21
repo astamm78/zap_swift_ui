@@ -18,7 +18,7 @@
     <string>Apple Distribution</string>
     <key>provisioningProfiles</key>
     <dict>
-        <key>com.andrewstamm.Zap-Comics</key>
+        <key>Zap Comics</key>
         <string>Zap Comics Ad Hoc</string>
     </dict>
 </dict>
