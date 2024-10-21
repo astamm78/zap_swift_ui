@@ -17,6 +17,7 @@
 		E438DEFC2CBDA2E50010EA02 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E438DEFB2CBDA2E50010EA02 /* SDWebImageSwiftUI */; };
 		E48BB65E2CBD990F00D33B96 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E48BB65D2CBD990F00D33B96 /* SDWebImageSwiftUI */; };
 		E4C2B4D92CBD9514003ACF27 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4C2B4D82CBD9514003ACF27 /* Networking */; };
+		E4C9B4C92CC6E80300324F8E /* bitbucket-pipelines.yml in Resources */ = {isa = PBXBuildFile; fileRef = E4C9B4C82CC6E80300324F8E /* bitbucket-pipelines.yml */; };
 		E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4D3670A2CB1EA0D008CF162 /* Networking */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		E456F7802CB1D7F700BCF142 /* Zap Comics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zap Comics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E456F7902CB1D7F900BCF142 /* Zap ComicsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zap ComicsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zap ComicsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4C9B4C82CC6E80300324F8E /* bitbucket-pipelines.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "bitbucket-pipelines.yml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -121,6 +123,7 @@
 				E456F7932CB1D7F900BCF142 /* Zap ComicsTests */,
 				E456F79D2CB1D7F900BCF142 /* Zap ComicsUITests */,
 				E456F7812CB1D7F700BCF142 /* Products */,
+				E4C9B4C82CC6E80300324F8E /* bitbucket-pipelines.yml */,
 			);
 			sourceTree = "<group>";
 		};
@@ -270,6 +273,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C9B4C92CC6E80300324F8E /* bitbucket-pipelines.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
