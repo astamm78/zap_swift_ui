@@ -19,7 +19,7 @@
     <key>provisioningProfiles</key>
     <dict>
         <key>com.andrewstamm.Zap-Comics</key>
-        <string>development.cer</string>
+        <string>Zap Comics Ad Hoc</string>
     </dict>
 </dict>
 </plist>
