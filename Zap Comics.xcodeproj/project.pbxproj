@@ -7,12 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E41A09612CC6E19B00CB898F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E41A09602CC6E19B00CB898F /* FirebaseAnalytics */; };
+		E41A09632CC6E19B00CB898F /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = E41A09622CC6E19B00CB898F /* FirebaseAnalyticsOnDeviceConversion */; };
+		E41A09652CC6E19B00CB898F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = E41A09642CC6E19B00CB898F /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		E41A09672CC6E19B00CB898F /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = E41A09662CC6E19B00CB898F /* FirebaseAppCheck */; };
+		E41A09692CC6E19B00CB898F /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E41A09682CC6E19B00CB898F /* FirebaseAppDistribution-Beta */; };
 		E436C5532CB2F57A00B1F1CE /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5522CB2F57A00B1F1CE /* Networking */; };
 		E436C5562CB2F58500B1F1CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */; };
 		E438DEFC2CBDA2E50010EA02 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E438DEFB2CBDA2E50010EA02 /* SDWebImageSwiftUI */; };
 		E48BB65E2CBD990F00D33B96 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E48BB65D2CBD990F00D33B96 /* SDWebImageSwiftUI */; };
 		E4C2B4D92CBD9514003ACF27 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4C2B4D82CBD9514003ACF27 /* Networking */; };
+		E4C9B4C92CC6E80300324F8E /* bitbucket-pipelines.yml in Resources */ = {isa = PBXBuildFile; fileRef = E4C9B4C82CC6E80300324F8E /* bitbucket-pipelines.yml */; };
 		E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4D3670A2CB1EA0D008CF162 /* Networking */; };
+		E4DAF4D92CC8215100B2C58F /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = E4DAF4D82CC8215100B2C58F /* FirebaseCore */; };
+		E4DAF4DB2CC8215600B2C58F /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = E4DAF4DA2CC8215600B2C58F /* FirebaseCore */; };
+		E4DAF4DD2CC8216600B2C58F /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = E4DAF4DC2CC8216600B2C58F /* FirebaseCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +46,7 @@
 		E456F7802CB1D7F700BCF142 /* Zap Comics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Zap Comics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E456F7902CB1D7F900BCF142 /* Zap ComicsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zap ComicsTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Zap ComicsUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4C9B4C82CC6E80300324F8E /* bitbucket-pipelines.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = "bitbucket-pipelines.yml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -79,9 +89,15 @@
 			files = (
 				E48BB65E2CBD990F00D33B96 /* SDWebImageSwiftUI in Frameworks */,
 				E436C5562CB2F58500B1F1CE /* SDWebImageSwiftUI in Frameworks */,
+				E4DAF4DD2CC8216600B2C58F /* FirebaseCore in Frameworks */,
+				E41A09612CC6E19B00CB898F /* FirebaseAnalytics in Frameworks */,
+				E41A09632CC6E19B00CB898F /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				E436C5532CB2F57A00B1F1CE /* Networking in Frameworks */,
 				E4C2B4D92CBD9514003ACF27 /* Networking in Frameworks */,
 				E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */,
+				E41A09692CC6E19B00CB898F /* FirebaseAppDistribution-Beta in Frameworks */,
+				E41A09672CC6E19B00CB898F /* FirebaseAppCheck in Frameworks */,
+				E41A09652CC6E19B00CB898F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4DAF4D92CC8215100B2C58F /* FirebaseCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4DAF4DB2CC8215600B2C58F /* FirebaseCore in Frameworks */,
 				E438DEFC2CBDA2E50010EA02 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +129,8 @@
 				E456F7932CB1D7F900BCF142 /* Zap ComicsTests */,
 				E456F79D2CB1D7F900BCF142 /* Zap ComicsUITests */,
 				E456F7812CB1D7F700BCF142 /* Products */,
+				E4C9B4C82CC6E80300324F8E /* bitbucket-pipelines.yml */,
+				E4DAF4D72CC8215100B2C58F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +142,13 @@
 				E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E4DAF4D72CC8215100B2C58F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +176,12 @@
 				E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */,
 				E4C2B4D82CBD9514003ACF27 /* Networking */,
 				E48BB65D2CBD990F00D33B96 /* SDWebImageSwiftUI */,
+				E41A09602CC6E19B00CB898F /* FirebaseAnalytics */,
+				E41A09622CC6E19B00CB898F /* FirebaseAnalyticsOnDeviceConversion */,
+				E41A09642CC6E19B00CB898F /* FirebaseAnalyticsWithoutAdIdSupport */,
+				E41A09662CC6E19B00CB898F /* FirebaseAppCheck */,
+				E41A09682CC6E19B00CB898F /* FirebaseAppDistribution-Beta */,
+				E4DAF4DC2CC8216600B2C58F /* FirebaseCore */,
 			);
 			productName = "Zap Comics";
 			productReference = E456F7802CB1D7F700BCF142 /* Zap Comics.app */;
@@ -172,6 +205,7 @@
 			);
 			name = "Zap ComicsTests";
 			packageProductDependencies = (
+				E4DAF4D82CC8215100B2C58F /* FirebaseCore */,
 			);
 			productName = "Zap ComicsTests";
 			productReference = E456F7902CB1D7F900BCF142 /* Zap ComicsTests.xctest */;
@@ -196,6 +230,7 @@
 			name = "Zap ComicsUITests";
 			packageProductDependencies = (
 				E438DEFB2CBDA2E50010EA02 /* SDWebImageSwiftUI */,
+				E4DAF4DA2CC8215600B2C58F /* FirebaseCore */,
 			);
 			productName = "Zap ComicsUITests";
 			productReference = E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */;
@@ -236,6 +271,7 @@
 			packageReferences = (
 				E4C2B4D72CBD9514003ACF27 /* XCRemoteSwiftPackageReference "Networking" */,
 				E48BB65C2CBD990F00D33B96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E456F7812CB1D7F700BCF142 /* Products */;
@@ -254,6 +290,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4C9B4C92CC6E80300324F8E /* bitbucket-pipelines.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +493,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.0;
+				OTHER_LDFLAGS = "$(inherited)";
+				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewstamm.Zap-Comics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -494,6 +533,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.0;
+				OTHER_LDFLAGS = "$(inherited)";
+				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewstamm.Zap-Comics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -620,6 +661,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.4.0;
+			};
+		};
 		E48BB65C2CBD990F00D33B96 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -639,6 +688,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E41A09602CC6E19B00CB898F /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		E41A09622CC6E19B00CB898F /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		E41A09642CC6E19B00CB898F /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		E41A09662CC6E19B00CB898F /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		E41A09682CC6E19B00CB898F /* FirebaseAppDistribution-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAppDistribution-Beta";
+		};
 		E436C5522CB2F57A00B1F1CE /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Networking;
@@ -665,6 +739,21 @@
 		E4D3670A2CB1EA0D008CF162 /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Networking;
+		};
+		E4DAF4D82CC8215100B2C58F /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		E4DAF4DA2CC8215600B2C58F /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		E4DAF4DC2CC8216600B2C58F /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
