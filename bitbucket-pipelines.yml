@@ -5,6 +5,7 @@ pipelines:
           name: Run Tests
           runs-on:
             - self.hosted
+            - macos
           script:
             - xcodebuild -workspace "Zap Comics.xcworkspace" -scheme "Zap Comics" -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' test | xcpretty --test --color
           artifacts:
@@ -14,6 +15,7 @@ pipelines:
           name: Deploy
           runs-on:
             - self.hosted
+            - macos
           script:
             - xcodebuild -workspace "Zap Comics.xcworkspace" -scheme "Zap Comics" -archivePath build/version/app.xcarchive archive
             - xcodebuild -exportArchive -archivePath build/version/app.xcarchive -exportPath build/version -exportOptionsPlist "Zap Comics/ci/export.plist" -allowProvisioningUpdates
