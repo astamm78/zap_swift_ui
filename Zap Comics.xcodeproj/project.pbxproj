@@ -19,6 +19,9 @@
 		E4C2B4D92CBD9514003ACF27 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4C2B4D82CBD9514003ACF27 /* Networking */; };
 		E4C9B4C92CC6E80300324F8E /* bitbucket-pipelines.yml in Resources */ = {isa = PBXBuildFile; fileRef = E4C9B4C82CC6E80300324F8E /* bitbucket-pipelines.yml */; };
 		E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E4D3670A2CB1EA0D008CF162 /* Networking */; };
+		E4DAF4D92CC8215100B2C58F /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = E4DAF4D82CC8215100B2C58F /* FirebaseCore */; };
+		E4DAF4DB2CC8215600B2C58F /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = E4DAF4DA2CC8215600B2C58F /* FirebaseCore */; };
+		E4DAF4DD2CC8216600B2C58F /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = E4DAF4DC2CC8216600B2C58F /* FirebaseCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +89,7 @@
 			files = (
 				E48BB65E2CBD990F00D33B96 /* SDWebImageSwiftUI in Frameworks */,
 				E436C5562CB2F58500B1F1CE /* SDWebImageSwiftUI in Frameworks */,
+				E4DAF4DD2CC8216600B2C58F /* FirebaseCore in Frameworks */,
 				E41A09612CC6E19B00CB898F /* FirebaseAnalytics in Frameworks */,
 				E41A09632CC6E19B00CB898F /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				E436C5532CB2F57A00B1F1CE /* Networking in Frameworks */,
@@ -101,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4DAF4D92CC8215100B2C58F /* FirebaseCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4DAF4DB2CC8215600B2C58F /* FirebaseCore in Frameworks */,
 				E438DEFC2CBDA2E50010EA02 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +130,7 @@
 				E456F79D2CB1D7F900BCF142 /* Zap ComicsUITests */,
 				E456F7812CB1D7F700BCF142 /* Products */,
 				E4C9B4C82CC6E80300324F8E /* bitbucket-pipelines.yml */,
+				E4DAF4D72CC8215100B2C58F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -135,6 +142,13 @@
 				E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E4DAF4D72CC8215100B2C58F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +181,7 @@
 				E41A09642CC6E19B00CB898F /* FirebaseAnalyticsWithoutAdIdSupport */,
 				E41A09662CC6E19B00CB898F /* FirebaseAppCheck */,
 				E41A09682CC6E19B00CB898F /* FirebaseAppDistribution-Beta */,
+				E4DAF4DC2CC8216600B2C58F /* FirebaseCore */,
 			);
 			productName = "Zap Comics";
 			productReference = E456F7802CB1D7F700BCF142 /* Zap Comics.app */;
@@ -190,6 +205,7 @@
 			);
 			name = "Zap ComicsTests";
 			packageProductDependencies = (
+				E4DAF4D82CC8215100B2C58F /* FirebaseCore */,
 			);
 			productName = "Zap ComicsTests";
 			productReference = E456F7902CB1D7F900BCF142 /* Zap ComicsTests.xctest */;
@@ -214,6 +230,7 @@
 			name = "Zap ComicsUITests";
 			packageProductDependencies = (
 				E438DEFB2CBDA2E50010EA02 /* SDWebImageSwiftUI */,
+				E4DAF4DA2CC8215600B2C58F /* FirebaseCore */,
 			);
 			productName = "Zap ComicsUITests";
 			productReference = E456F79A2CB1D7F900BCF142 /* Zap ComicsUITests.xctest */;
@@ -476,6 +493,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.0;
+				OTHER_LDFLAGS = "$(inherited)";
+				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewstamm.Zap-Comics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -514,6 +533,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 5.0;
+				OTHER_LDFLAGS = "$(inherited)";
+				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewstamm.Zap-Comics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -718,6 +739,21 @@
 		E4D3670A2CB1EA0D008CF162 /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Networking;
+		};
+		E4DAF4D82CC8215100B2C58F /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		E4DAF4DA2CC8215600B2C58F /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		E4DAF4DC2CC8216600B2C58F /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
