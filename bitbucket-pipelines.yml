@@ -6,6 +6,7 @@ pipelines:
           caches:
             - swiftpm
           script:
+            - export PATH="/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH"
             - xcodebuild -resolvePackageDependencies -workspace "Zap Comics.xcworkspace" -scheme "Zap Comics"
 
       - step:
@@ -13,6 +14,7 @@ pipelines:
           runs-on:
             - self.hosted
           script:
+            - export PATH="/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH"
             - xcodebuild -workspace "Zap Comics.xcworkspace" -scheme "Zap Comics" -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' test | xcpretty --test --color
           artifacts:
             - test-results
@@ -22,6 +24,7 @@ pipelines:
           runs-on:
             - self.hosted
           script:
+            - export PATH="/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH"
             - xcodebuild -workspace "Zap Comics.xcworkspace" -scheme "Zap Comics" -archivePath build/version/app.xcarchive archive
             - xcodebuild -exportArchive -archivePath build/version/app.xcarchive -exportPath build/version -exportOptionsPlist "Zap Comics/ci/export.plist" -allowProvisioningUpdates
             - firebase appdistribution:distribute build/version/Zap\ Comics.ipa --app 1:787039729981:ios:48e1949daa9ed79fef2d54 --release-notes-file ci/releasenote.txt --groups-file "Zap Comics/ci/groups.txt" --testers-file "Zap Comics/ci/testers.txt" --token 1//04IePVb53m-fJCgYIARAAGAQSNwF-L9IrMN_5gnKaSK0bF2P2g-npY8lpg4RkF4gJ7xhzOByTz4mq05H9oHG4WeEN1Iwi5fJb0QU
