@@ -28,6 +28,7 @@
       }
     },
     {
+      "enabled" : false,
       "skippedTests" : [
         "Zap_ComicsUITests",
         "Zap_ComicsUITests\/testExample()",
