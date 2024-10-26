@@ -25,7 +25,7 @@ struct ComicBookCell: View {
                 .foregroundStyle(.gray)
                 .frame(height: 0.6)
             
-        HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .top, spacing: 12) {
                 WebImage(url: comicBook.imageURL)
                     .resizable()
                     .frame(width: 90, height: 135)
@@ -121,7 +121,7 @@ struct ComicBookCell: View {
             .padding()
             .background(
                 LinearGradient(
-                    colors: [.gray.opacity(0.25), .white],
+                    colors: [leadBGGradientColor, .white],
                     startPoint: .bottomLeading,
                     endPoint: .topTrailing
                 )
@@ -132,6 +132,18 @@ struct ComicBookCell: View {
                 .frame(height: 0.6)
         }
         .background(.white)
+    }
+    
+    var leadBGGradientColor: Color {
+        if comicBook.purchased {
+            return .green.opacity(0.25)
+        } else if comicBook.selected {
+            return .zapYellow.opacity(0.25)
+        } else if comicBook.followed {
+            return .zapBlue.opacity(0.25)
+        } else {
+            return .gray.opacity(0.25)
+        }
     }
     
     func setPurchaseView() -> Self {
@@ -146,22 +158,45 @@ struct ComicBookCell: View {
 }
 
 #Preview {
-    ComicBookCell(comicBook: ComicBook.preview)
-        .environmentObject(DashboardViewModel())
+    comicBookPreview(ComicBook.preview, setPurchaseView: false)
 }
 
 #Preview("Shopping List View") {
     var comicBook = ComicBook.preview
     
-    return ComicBookCell(comicBook: comicBook)
-        .setPurchaseView()
-        .environmentObject(DashboardViewModel())
+    return comicBookPreview(comicBook)
 }
 
 #Preview("Shopping List View Purchased") {
     var comicBook = ComicBook.preview
+    comicBook.purchased = true
     
-    return ComicBookCell(comicBook: comicBook)
-        .setPurchaseView()
-        .environmentObject(DashboardViewModel())
+    return comicBookPreview(comicBook)
+}
+
+#Preview("Shopping List View Selected") {
+    var comicBook = ComicBook.preview
+    comicBook.selected = true
+    
+    return comicBookPreview(comicBook)
+}
+
+
+#Preview("Shopping List View Followed") {
+    var comicBook = ComicBook.preview
+    comicBook.followed = true
+    
+    return comicBookPreview(comicBook)
+}
+
+
+@MainActor func comicBookPreview(_ comicBook: ComicBook, setPurchaseView: Bool = true) -> some View {
+    ZStack {
+        ComicBookCell(comicBook: comicBook)
+            .if(setPurchaseView, transform: { view in
+                view.setPurchaseView()
+            })
+            .environmentObject(DashboardViewModel())
+    }
+    .frame(height: 160)
 }
