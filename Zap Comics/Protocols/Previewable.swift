@@ -24,7 +24,19 @@ extension Previewable {
     private static func loadPreview(from filename: String) -> PreviewType {
         let url = Bundle.main.url(forResource: filename, withExtension: "json")!
         let data = try! Data(contentsOf: url)
-        print(String(describing: PreviewType.self))
-        return try! JSONDecoder().decode(PreviewType.self, from: data)
+        
+        var jsonDict = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+        
+        if jsonDict["username"] as? String == "REMOVED_KEY" {
+            jsonDict["username"] = Secrets.userPreviewUsername ?? ""
+        }
+        
+        if jsonDict["api_key"] as? String == "REMOVED_KEY" {
+            jsonDict["api_key"] = Secrets.userPreviewApiKey ?? ""
+        }
+        
+        let updatedData = try! JSONSerialization.data(withJSONObject: jsonDict, options: [])
+
+        return try! JSONDecoder().decode(PreviewType.self, from: updatedData)
     }
 }

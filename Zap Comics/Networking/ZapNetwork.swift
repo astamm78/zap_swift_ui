@@ -25,10 +25,7 @@ class ZapNetwork {
             "Content-Type": "application/json"
         ]
         
-        if let path = Bundle.main.path(forResource: "Networking", ofType: "plist"),
-           let keys = NSDictionary(contentsOfFile: path),
-           let apiKey = keys["apiKey"] as? String {
-            
+        if let apiKey = Secrets.apiKey {
             headerFields["Authorization"] = apiKey
         }
         
