@@ -27,6 +27,10 @@ struct NewComicsView: View {
                         spacing: 0,
                         pinnedViews: .sectionHeaders
                     ) {
+                        Button("Crash") {
+                          fatalError("Crash was triggered")
+                        }
+                        
                         if searchResults.isEmpty {
                             publisherView
                         } else {

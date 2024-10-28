@@ -12,6 +12,7 @@
 		E41A09652CC6E19B00CB898F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = E41A09642CC6E19B00CB898F /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		E41A09672CC6E19B00CB898F /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = E41A09662CC6E19B00CB898F /* FirebaseAppCheck */; };
 		E41A09692CC6E19B00CB898F /* FirebaseAppDistribution-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = E41A09682CC6E19B00CB898F /* FirebaseAppDistribution-Beta */; };
+		E43681BC2CCDEFD5009EE7EC /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = E43681BB2CCDEFD5009EE7EC /* FirebaseCrashlytics */; };
 		E436C5532CB2F57A00B1F1CE /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5522CB2F57A00B1F1CE /* Networking */; };
 		E436C5562CB2F58500B1F1CE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E436C5552CB2F58500B1F1CE /* SDWebImageSwiftUI */; };
 		E438DEFC2CBDA2E50010EA02 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E438DEFB2CBDA2E50010EA02 /* SDWebImageSwiftUI */; };
@@ -96,6 +97,7 @@
 				E4C2B4D92CBD9514003ACF27 /* Networking in Frameworks */,
 				E4D3670B2CB1EA0D008CF162 /* Networking in Frameworks */,
 				E41A09692CC6E19B00CB898F /* FirebaseAppDistribution-Beta in Frameworks */,
+				E43681BC2CCDEFD5009EE7EC /* FirebaseCrashlytics in Frameworks */,
 				E41A09672CC6E19B00CB898F /* FirebaseAppCheck in Frameworks */,
 				E41A09652CC6E19B00CB898F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
@@ -161,6 +163,7 @@
 				E456F77C2CB1D7F700BCF142 /* Sources */,
 				E456F77D2CB1D7F700BCF142 /* Frameworks */,
 				E456F77E2CB1D7F700BCF142 /* Resources */,
+				E43681BA2CCDEDAC009EE7EC /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -182,6 +185,7 @@
 				E41A09662CC6E19B00CB898F /* FirebaseAppCheck */,
 				E41A09682CC6E19B00CB898F /* FirebaseAppDistribution-Beta */,
 				E4DAF4DC2CC8216600B2C58F /* FirebaseCore */,
+				E43681BB2CCDEFD5009EE7EC /* FirebaseCrashlytics */,
 			);
 			productName = "Zap Comics";
 			productReference = E456F7802CB1D7F700BCF142 /* Zap Comics.app */;
@@ -309,6 +313,33 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E43681BA2CCDEDAC009EE7EC /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			name = Crashlytics;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E456F77C2CB1D7F700BCF142 /* Sources */ = {
@@ -473,7 +504,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Zap Comics/Preview Content\"";
 				DEVELOPMENT_TEAM = VFK6A8UE9H;
 				ENABLE_PREVIEWS = YES;
@@ -492,8 +524,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0;
-				OTHER_LDFLAGS = "$(inherited)";
+				MARKETING_VERSION = 5.0.1;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewstamm.Zap-Comics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -513,7 +548,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Zap Comics/Preview Content\"";
 				DEVELOPMENT_TEAM = VFK6A8UE9H;
 				ENABLE_PREVIEWS = YES;
@@ -532,8 +568,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 5.0;
-				OTHER_LDFLAGS = "$(inherited)";
+				MARKETING_VERSION = 5.0.1;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				"OTHER_LDFLAGS[arch=*]" = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewstamm.Zap-Comics";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -712,6 +751,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseAppDistribution-Beta";
+		};
+		E43681BB2CCDEFD5009EE7EC /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E41A095F2CC6E19B00CB898F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		E436C5522CB2F57A00B1F1CE /* Networking */ = {
 			isa = XCSwiftPackageProductDependency;
