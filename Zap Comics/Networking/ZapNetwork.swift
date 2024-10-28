@@ -22,9 +22,15 @@ class ZapNetwork {
         )
         
         var headerFields = [
-            "Content-Type": "application/json",
-            "Authorization": "***REMOVED***"
+            "Content-Type": "application/json"
         ]
+        
+        if let path = Bundle.main.path(forResource: "Networking", ofType: "plist"),
+           let keys = NSDictionary(contentsOfFile: path),
+           let apiKey = keys["apiKey"] as? String {
+            
+            headerFields["Authorization"] = apiKey
+        }
         
         if let user = User.current {
             headerFields["USER-KEY"] = user.apiKey
