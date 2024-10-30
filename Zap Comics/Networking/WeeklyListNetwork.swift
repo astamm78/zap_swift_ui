@@ -8,14 +8,14 @@
 import Foundation
 import Networking
 
-class WeeklyListNetwork: ZapNetwork {
+struct WeeklyListNetwork {
     
-    static func getWeeklyList() async throws -> WeeklyListResponse {
-        let response = try await service.get(
+    func getWeeklyList() async throws -> WeeklyListResponse {
+        let response = try await ZapNetwork.shared.service.get(
             "/weekly_lists/current/by_publisher"
         )
         
-        let weeklyListResponse: WeeklyListResponse = try handleResponse(response)
+        let weeklyListResponse: WeeklyListResponse = try ZapResponseHandler.shared.handleResponse(response)
         return weeklyListResponse
     }
 }

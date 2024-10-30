@@ -48,7 +48,7 @@ class DashboardViewModel: ObservableObject {
         
         Task {
             do {
-                let weeklyListResponse = try await WeeklyListNetwork.getWeeklyList()
+                let weeklyListResponse = try await WeeklyListNetwork().getWeeklyList()
                 self.weeklyList = weeklyListResponse.weeklyList
             } catch {
                 print(String(describing: error))
@@ -59,7 +59,7 @@ class DashboardViewModel: ObservableObject {
     func getCurrentList() {
         Task {
             do {
-                let currentList = try await ShoppingListNetwork.getShoppingList()
+                let currentList = try await ShoppingListNetwork().getShoppingList()
                 self.currentList = currentList.shoppingList
             } catch {
                 print(String(describing: error))
@@ -70,7 +70,7 @@ class DashboardViewModel: ObservableObject {
     func getLeftovers() {
         Task {
             do {
-                let leftoverList = try await ShoppingListNetwork.getLeftovers()
+                let leftoverList = try await ShoppingListNetwork().getLeftovers()
                 self.leftoverList = leftoverList
             } catch {
                 print(String(describing: error))
@@ -81,7 +81,7 @@ class DashboardViewModel: ObservableObject {
     func getPastLists() {
         Task {
             do {
-                let pastListsResponse = try await ShoppingListNetwork.getPastLists()
+                let pastListsResponse = try await ShoppingListNetwork().getPastLists()
                 self.pastLists = pastListsResponse.shoppingLists
             } catch {
                 print(String(describing: error))
@@ -123,7 +123,7 @@ class DashboardViewModel: ObservableObject {
     func addComicBookToList(_ comicBook: ComicBook) {
         Task {
             do {
-                let _ = try await ComicBookNetwork.addComicBookToList(comicBook)
+                let _ = try await ComicBookNetwork().addComicBookToList(comicBook)
                 
                 weeklyList?.updateComicBookSelected(comicBook)
                 weeklyList?.save()
@@ -139,7 +139,7 @@ class DashboardViewModel: ObservableObject {
     func removeComicBookFromList(_ comicBook: ComicBook) {
         Task {
             do {
-                let _ = try await ComicBookNetwork.removeComicBookFromList(comicBook)
+                let _ = try await ComicBookNetwork().removeComicBookFromList(comicBook)
                 
                 weeklyList?.updateComicBookSelected(comicBook)
                 weeklyList?.save()
@@ -157,7 +157,7 @@ class DashboardViewModel: ObservableObject {
         
         Task {
             do {
-                let _ = try await ComicBookNetwork.updatePurchaseStatus(
+                let _ = try await ComicBookNetwork().updatePurchaseStatus(
                     for: comicBook,
                     and: shoppingList,
                     purchased: !comicBook.purchased

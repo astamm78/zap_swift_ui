@@ -19,7 +19,7 @@ class ContentViewModel: ObservableObject {
     func login() {
         Task {
             do {
-                let userResponse = try await SessionsNetwork.login(
+                let userResponse = try await SessionsNetwork().login(
                     with: self.loginName,
                     and: self.loginPassword
                 )

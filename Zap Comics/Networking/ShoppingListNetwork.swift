@@ -8,26 +8,26 @@
 import Foundation
 import Networking
 
-class ShoppingListNetwork: ZapNetwork {
+struct ShoppingListNetwork {
     
-    static func getShoppingList() async throws -> ShoppingListResponse {
-        let response = try await service.get("/shopping_lists/current")
+    func getShoppingList() async throws -> ShoppingListResponse {
+        let response = try await ZapNetwork.shared.service.get("/shopping_lists/current")
         
-        let shoppingListResponse: ShoppingListResponse = try handleResponse(response)
+        let shoppingListResponse: ShoppingListResponse = try ZapResponseHandler.shared.handleResponse(response)
         return shoppingListResponse
     }
     
-    static func getLeftovers() async throws -> LeftoverList {
-        let response = try await service.get("/shopping_lists/leftover")
+    func getLeftovers() async throws -> LeftoverList {
+        let response = try await ZapNetwork.shared.service.get("/shopping_lists/leftover")
         
-        let leftoverList: LeftoverList = try handleResponse(response)
+        let leftoverList: LeftoverList = try ZapResponseHandler.shared.handleResponse(response)
         return leftoverList
     }
     
-    static func getPastLists() async throws -> ShoppingListCollectionResponse {
-        let response = try await service.get("/shopping_lists/past_lists")
+    func getPastLists() async throws -> ShoppingListCollectionResponse {
+        let response = try await ZapNetwork.shared.service.get("/shopping_lists/past_lists")
         
-        let pastListsResponse: ShoppingListCollectionResponse = try handleResponse(response)
+        let pastListsResponse: ShoppingListCollectionResponse = try ZapResponseHandler.shared.handleResponse(response)
         return pastListsResponse
     }
 }

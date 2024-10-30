@@ -8,10 +8,10 @@
 import Foundation
 import Networking
 
-class ComicBookNetwork: ZapNetwork {
+struct ComicBookNetwork {
     
-    static func addComicBookToList(_ comicBook: ComicBook) async throws -> ComicBookResponse {
-        let response = try await service.post(
+    func addComicBookToList(_ comicBook: ComicBook) async throws -> ComicBookResponse {
+        let response = try await ZapNetwork.shared.service.post(
             "/selected_comic_books",
             parameterType: .json,
             parameters: [
@@ -21,23 +21,23 @@ class ComicBookNetwork: ZapNetwork {
             ]
         )
         
-        let comicBookResponse: ComicBookResponse = try handleResponse(response)
+        let comicBookResponse: ComicBookResponse = try ZapResponseHandler.shared.handleResponse(response)
         return comicBookResponse
     }
     
-    static func removeComicBookFromList(_ comicBook: ComicBook) async throws -> ComicBookResponse {
-        let response = try await service.delete("/selected_comic_books/comic_book/\(comicBook.id)")
+    func removeComicBookFromList(_ comicBook: ComicBook) async throws -> ComicBookResponse {
+        let response = try await ZapNetwork.shared.service.delete("/selected_comic_books/comic_book/\(comicBook.id)")
         
-        let comicBookResponse: ComicBookResponse = try handleResponse(response)
+        let comicBookResponse: ComicBookResponse = try ZapResponseHandler.shared.handleResponse(response)
         return comicBookResponse
     }
     
-    static func updatePurchaseStatus(
+    func updatePurchaseStatus(
         for comicBook: ComicBook,
         and shoppingList: ShoppingList,
         purchased: Bool
     ) async throws -> Bool {
-        let response = try await service.put(
+        let response = try await ZapNetwork.shared.service.put(
             "/selected_comic_books/comic_book/\(comicBook.id)/shopping_list/\(shoppingList.id)",
             parameterType: .json,
             parameters: [
@@ -47,7 +47,7 @@ class ComicBookNetwork: ZapNetwork {
             ]
         )
         
-        return handleEmptyResponse(response)
+        return ZapResponseHandler.shared.handleEmptyResponse(response)
     }
     
 }

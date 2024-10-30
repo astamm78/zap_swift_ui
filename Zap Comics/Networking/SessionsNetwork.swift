@@ -8,10 +8,10 @@
 import Foundation
 import Networking
 
-class SessionsNetwork: ZapNetwork {
+struct SessionsNetwork {
     
-    static func login(with username: String, and password: String) async throws -> UserResponse {
-        let response = try await service.post(
+    func login(with username: String, and password: String) async throws -> UserResponse {
+        let response = try await ZapNetwork.shared.service.post(
             "/sessions",
             parameterType: .json,
             parameters: [
@@ -22,12 +22,12 @@ class SessionsNetwork: ZapNetwork {
             ]
         )
         
-        let userResponse: UserResponse = try handleResponse(response)
+        let userResponse: UserResponse = try ZapResponseHandler.shared.handleResponse(response)
         return userResponse
     }
     
     static func register(with username: String, and password: String) async throws -> UserResponse {
-        let response = try await service.post(
+        let response = try await ZapNetwork.shared.service.post(
             "/users",
             parameterType: .json,
             parameters: [
@@ -38,7 +38,7 @@ class SessionsNetwork: ZapNetwork {
             ]
         )
          
-        let userResponse: UserResponse = try handleResponse(response)
+        let userResponse: UserResponse = try ZapResponseHandler.shared.handleResponse(response)
         return userResponse
     }
     
