@@ -26,7 +26,7 @@ struct SessionsNetwork {
         return userResponse
     }
     
-    static func register(with username: String, and password: String) async throws -> UserResponse {
+    func register(with username: String, and password: String) async throws -> UserResponse {
         let response = try await ZapNetwork.shared.service.post(
             "/users",
             parameterType: .json,
@@ -40,6 +40,14 @@ struct SessionsNetwork {
          
         let userResponse: UserResponse = try ZapResponseHandler.shared.handleResponse(response)
         return userResponse
+    }
+    
+    func deleteAccount() async throws -> Bool {
+        guard let user = User.current else { return false }
+        
+        let response = try await ZapNetwork.shared.service.delete("/users/\(user.id)")
+        
+        return ZapResponseHandler.shared.handleEmptyResponse(response)
     }
     
 }

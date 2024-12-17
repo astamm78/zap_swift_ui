@@ -42,10 +42,24 @@ class ContentViewModel: ObservableObject {
         currentUser = nil
     }
     
+    func deleteAccount() {
+        Task {
+            do {
+                let success = try await SessionsNetwork().deleteAccount()
+                
+                guard success else { return }
+                
+                logOut()
+            } catch {
+                print(String(describing: error))
+            }
+        }
+    }
+    
     func register() {
         Task {
             do {
-                let userResponse = try await SessionsNetwork.register(
+                let userResponse = try await SessionsNetwork().register(
                     with: self.loginName,
                     and: self.loginPassword
                 )

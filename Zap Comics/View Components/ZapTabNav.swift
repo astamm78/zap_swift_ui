@@ -13,6 +13,8 @@ struct ZapTabNav: View {
     var dashboardTab: DashboardTab
 
     let coloredNavAppearance = UINavigationBarAppearance()
+    
+    @State private var showAlert = false
 
     init(dashboardTab: DashboardTab) {
         self.dashboardTab = dashboardTab
@@ -59,6 +61,12 @@ struct ZapTabNav: View {
                             Text("Sign Out")
                         }
                         .accessibilityIdentifier(TestingIdentifiers.Dashboard.logoutButton)
+                        
+                        Button {
+                            showAlert = true
+                        } label: {
+                            Text("Delete Your Account")
+                        }
                     }, label: {
                         Image(systemName: "line.horizontal.3")
                             .fontWeight(.bold)
@@ -78,6 +86,19 @@ struct ZapTabNav: View {
         .accessibilityAddTraits(.isSelected)
         .toolbarBackground(.visible, for: .tabBar)
         .toolbarBackground(Color.zapYellow, for: .tabBar)
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Warning"),
+                message: Text("This will delete your account and all saved data."),
+                primaryButton: .destructive(
+                    Text("Proceed"),
+                    action: {
+                        contentVM.deleteAccount()
+                    }
+                ),
+                secondaryButton: .cancel()
+            )
+        }
     }
 }
 
