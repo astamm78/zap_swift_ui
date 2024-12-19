@@ -13,8 +13,8 @@ import Networking
 final class ContentViewModel_Testing: XCTestCase {
 
     override func setUpWithError() throws {
-        ZapNetwork.service.fakePOST("/sessions", fileName: "UserResponse.json")
-        ZapNetwork.service.fakePOST("/users", fileName: "UserResponse.json")
+        ZapNetwork.service().fakePOST("/sessions", fileName: "UserResponse.json")
+        ZapNetwork.service().fakePOST("/users", fileName: "UserResponse.json")
     }
 
     override func tearDownWithError() throws {}

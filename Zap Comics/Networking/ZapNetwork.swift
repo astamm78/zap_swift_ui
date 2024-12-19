@@ -10,9 +10,7 @@ import Networking
 
 struct ZapNetwork {
     
-    static var shared = ZapNetwork()
-    
-    lazy var service: Networking = {
+    static func service() -> Networking {
         let network = Networking(
             baseURL: "https://zap-list.com/api/v1",
             configuration: .default
@@ -30,8 +28,10 @@ struct ZapNetwork {
             headerFields["USER-KEY"] = user.apiKey
         }
         
+        print(String(describing: headerFields))
+        
         network.headerFields = headerFields
         return network
-    }()
+    }
 
 }

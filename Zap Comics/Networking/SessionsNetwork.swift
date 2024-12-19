@@ -11,7 +11,7 @@ import Networking
 struct SessionsNetwork {
     
     func login(with username: String, and password: String) async throws -> UserResponse {
-        let response = try await ZapNetwork.shared.service.post(
+        let response = try await ZapNetwork.service().post(
             "/sessions",
             parameterType: .json,
             parameters: [
@@ -27,7 +27,7 @@ struct SessionsNetwork {
     }
     
     func register(with username: String, and password: String) async throws -> UserResponse {
-        let response = try await ZapNetwork.shared.service.post(
+        let response = try await ZapNetwork.service().post(
             "/users",
             parameterType: .json,
             parameters: [
@@ -45,7 +45,7 @@ struct SessionsNetwork {
     func deleteAccount() async throws -> Bool {
         guard let user = User.current else { return false }
         
-        let response = try await ZapNetwork.shared.service.delete("/users/\(user.id)")
+        let response = try await ZapNetwork.service().delete("/users/\(user.id)")
         
         return ZapResponseHandler.shared.handleEmptyResponse(response)
     }

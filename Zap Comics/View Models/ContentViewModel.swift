@@ -24,9 +24,7 @@ class ContentViewModel: ObservableObject {
                     and: self.loginPassword
                 )
                 
-                userResponse.user.save()
-                self.currentUser = userResponse.user
-                await Application.bootstrap()
+                loadForUser(userResponse.user)
             } catch {
                 print(String(describing: error))
             }
@@ -34,12 +32,13 @@ class ContentViewModel: ObservableObject {
     }
     
     func logOut() {
-        User.clearCurrent()
-        WeeklyList.clearCurrent()
-        
-        loginName = ""
-        loginPassword = ""
-        currentUser = nil
+        if User.clearCurrent() {
+            WeeklyList.clearCurrent()
+            
+            loginName = ""
+            loginPassword = ""
+            currentUser = nil
+        }
     }
     
     func deleteAccount() {
@@ -64,11 +63,27 @@ class ContentViewModel: ObservableObject {
                     and: self.loginPassword
                 )
                 
-                userResponse.user.save()
-                self.currentUser = userResponse.user
-                await Application.bootstrap()
+                loadForUser(userResponse.user)
             } catch {
                 print(String(describing: error))
+            }
+        }
+    }
+    
+    fileprivate func loadForUser(_ user: User) {
+        user.save { success in
+            if success {
+                if let _currentUser = User.current {
+                    print("User data saved")
+                    Task {
+                        await Application.bootstrap()
+                        self.currentUser = _currentUser
+                    }
+                } else {
+                    print("Failed to retrieve user")
+                }
+            } else {
+                print("Failed to save user")
             }
         }
     }

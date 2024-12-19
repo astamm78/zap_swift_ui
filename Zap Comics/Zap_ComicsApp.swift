@@ -51,7 +51,7 @@ extension Zap_ComicsApp {
 
         if args.contains(UITestArguments.loggedIn) {
             guard let _ = User.current else {
-                User.preview.save()
+                User.preview.save(completion: {_ in })
                 return
             }
         }

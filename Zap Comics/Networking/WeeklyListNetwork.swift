@@ -11,7 +11,7 @@ import Networking
 struct WeeklyListNetwork {
     
     func getWeeklyList() async throws -> WeeklyListResponse {
-        let response = try await ZapNetwork.shared.service.get(
+        let response = try await ZapNetwork.service().get(
             "/weekly_lists/current/by_publisher"
         )
         

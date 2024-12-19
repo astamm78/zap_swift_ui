@@ -11,7 +11,7 @@ import Networking
 struct ComicBookNetwork {
     
     func addComicBookToList(_ comicBook: ComicBook) async throws -> ComicBookResponse {
-        let response = try await ZapNetwork.shared.service.post(
+        let response = try await ZapNetwork.service().post(
             "/selected_comic_books",
             parameterType: .json,
             parameters: [
@@ -26,7 +26,7 @@ struct ComicBookNetwork {
     }
     
     func removeComicBookFromList(_ comicBook: ComicBook) async throws -> ComicBookResponse {
-        let response = try await ZapNetwork.shared.service.delete("/selected_comic_books/comic_book/\(comicBook.id)")
+        let response = try await ZapNetwork.service().delete("/selected_comic_books/comic_book/\(comicBook.id)")
         
         let comicBookResponse: ComicBookResponse = try ZapResponseHandler.shared.handleResponse(response)
         return comicBookResponse
@@ -37,7 +37,7 @@ struct ComicBookNetwork {
         and shoppingList: ShoppingList,
         purchased: Bool
     ) async throws -> Bool {
-        let response = try await ZapNetwork.shared.service.put(
+        let response = try await ZapNetwork.service().put(
             "/selected_comic_books/comic_book/\(comicBook.id)/shopping_list/\(shoppingList.id)",
             parameterType: .json,
             parameters: [

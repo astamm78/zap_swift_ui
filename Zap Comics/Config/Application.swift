@@ -16,6 +16,10 @@ class Application: ApplicationManager {
     fileprivate static let current = Application()
 
     @MainActor static func bootstrap() async {
+        guard let _ = User.current?.apiKey else {
+            return
+        }
+        
         DashboardViewModel.shared.loadInitialData()
     }
     

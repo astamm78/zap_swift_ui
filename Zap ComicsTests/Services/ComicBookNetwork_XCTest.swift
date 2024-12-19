@@ -15,17 +15,17 @@ final class ComicBookNetwork_XCTest: XCTestCase {
     let shoppingList = ShoppingList.preview
 
     override func setUpWithError() throws {
-        ZapNetwork.service.fakePOST(
+        ZapNetwork.service().fakePOST(
             "/selected_comic_books",
             fileName: "ComicBookResponse.json"
         )
 
-        ZapNetwork.service.fakeDELETE(
+        ZapNetwork.service().fakeDELETE(
             "/selected_comic_books/comic_book/\(comicBook.id)",
             fileName: "ComicBookResponse.json"
         )
 
-        ZapNetwork.service.fakePUT(
+        ZapNetwork.service().fakePUT(
             "/selected_comic_books/comic_book/\(comicBook.id)/shopping_list/\(shoppingList.id)",
             response: true
         )

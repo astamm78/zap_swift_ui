@@ -13,8 +13,8 @@ import Networking
 final class ShoppingListNetwork_XCTest: XCTestCase {
 
     override func setUpWithError() throws {
-        ZapNetwork.service.fakeGET("/shopping_lists/current", fileName: "ShoppingListResponse.json")
-        ZapNetwork.service.fakeGET("/shopping_lists/leftover", fileName: "LeftoverList.json")
+        ZapNetwork.service().fakeGET("/shopping_lists/current", fileName: "ShoppingListResponse.json")
+        ZapNetwork.service().fakeGET("/shopping_lists/leftover", fileName: "LeftoverList.json")
     }
 
     override func tearDownWithError() throws {}

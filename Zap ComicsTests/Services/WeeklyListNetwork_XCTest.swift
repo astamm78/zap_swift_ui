@@ -12,7 +12,7 @@ import Networking
 final class WeeklyListNetwork_XCTest: XCTestCase {
 
     override func setUpWithError() throws {
-        ZapNetwork.service.fakeGET("/weekly_lists/current/by_publisher", fileName: "WeeklyListResponse.json")
+        ZapNetwork.service().fakeGET("/weekly_lists/current/by_publisher", fileName: "WeeklyListResponse.json")
     }
 
     override func tearDownWithError() throws {}

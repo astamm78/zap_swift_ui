@@ -126,10 +126,11 @@ class DashboardViewModel: ObservableObject {
                 let _ = try await ComicBookNetwork().addComicBookToList(comicBook)
                 
                 weeklyList?.updateComicBookSelected(comicBook)
-                weeklyList?.save()
+                weeklyList?.save(completion: { _ in
+                    self.getCurrentList()
+                    self.getLeftovers()
+                })
                 
-                getCurrentList()
-                getLeftovers()
             } catch {
                 print(String(describing: error))
             }
@@ -142,10 +143,11 @@ class DashboardViewModel: ObservableObject {
                 let _ = try await ComicBookNetwork().removeComicBookFromList(comicBook)
                 
                 weeklyList?.updateComicBookSelected(comicBook)
-                weeklyList?.save()
+                weeklyList?.save(completion: { _ in
+                    self.getCurrentList()
+                    self.getLeftovers()
+                })
                 
-                getCurrentList()
-                getLeftovers()
             } catch {
                 print(String(describing: error))
             }
@@ -164,10 +166,11 @@ class DashboardViewModel: ObservableObject {
                 )
                 
                 weeklyList?.updateComicBookPurchased(comicBook)
-                weeklyList?.save()
+                weeklyList?.save(completion: { _ in
+                    self.currentList?.updateComicBookPurchased(comicBook)
+                    self.leftoverList?.updateComicBookPurchased(comicBook)
+                })
                 
-                currentList?.updateComicBookPurchased(comicBook)
-                leftoverList?.updateComicBookPurchased(comicBook)
             } catch {
                 print(String(describing: error))
             }
