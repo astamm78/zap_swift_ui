@@ -20,7 +20,7 @@ final class WeeklyListNetwork_XCTest: XCTestCase {
     @MainActor
     func test_getWeeklyList_returnsWeeklyListResponse() throws {
         Task {
-            let response = try? await WeeklyListNetwork.getWeeklyList()
+            let response = try? await WeeklyListNetwork().getWeeklyList()
             XCTAssert(response != nil)
         }
     }

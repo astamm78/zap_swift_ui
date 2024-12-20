@@ -35,21 +35,21 @@ final class ComicBookNetwork_XCTest: XCTestCase {
 
     func test_addedComicBookToList_returnsAddedComicBookResponse() throws {
         Task {
-            let response = try? await ComicBookNetwork.addComicBookToList(comicBook)
+            let response = try? await ComicBookNetwork().addComicBookToList(comicBook)
             XCTAssert(response != nil)
         }
     }
 
     func test_removeComicBookFromList_returnsAddedComicBookResponse() throws {
         Task {
-            let response = try? await ComicBookNetwork.removeComicBookFromList(comicBook)
+            let response = try? await ComicBookNetwork().removeComicBookFromList(comicBook)
             XCTAssert(response != nil)
         }
     }
 
     func test_updatePurchaseStatus_returnsBool() throws {
         Task {
-            let response = try? await ComicBookNetwork.updatePurchaseStatus(
+            let response = try? await ComicBookNetwork().updatePurchaseStatus(
                 for: comicBook,
                 and: shoppingList,
                 purchased: true

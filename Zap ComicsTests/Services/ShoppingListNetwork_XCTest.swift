@@ -21,14 +21,14 @@ final class ShoppingListNetwork_XCTest: XCTestCase {
 
     func test_getShoppingList_returnsShoppingListResponse() throws {
         Task {
-            let response = try? await ShoppingListNetwork.getShoppingList()
+            let response = try? await ShoppingListNetwork().getShoppingList()
             XCTAssert(response != nil)
         }
     }
 
     func test_getLeftovers_returnsLeftoverList() throws {
         Task {
-            let response = try? await ShoppingListNetwork.getLeftovers()
+            let response = try? await ShoppingListNetwork().getLeftovers()
             XCTAssert(response != nil)
         }
     }

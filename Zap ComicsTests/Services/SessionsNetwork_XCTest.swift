@@ -20,14 +20,14 @@ final class SessionsNetwork_XCTest: XCTestCase {
 
     func test_login_shouldReturnUserResponse() throws {
         Task {
-            let response = try? await SessionsNetwork.login(with: "shards", and: "straugs")
+            let response = try? await SessionsNetwork().login(with: "shards", and: "straugs")
             XCTAssert(response != nil)
         }
     }
 
     func test_register_shouldReturnUserResponse() throws {
         Task {
-            let response = try? await SessionsNetwork.register(with: "shards", and: "straugs")
+            let response = try? await SessionsNetwork().register(with: "shards", and: "straugs")
             XCTAssert(response != nil)
         }
     }

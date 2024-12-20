@@ -28,11 +28,12 @@ final class ContentViewModel_Testing: XCTestCase {
 
     func test_logOut_shouldClearCurrentUser() throws {
         Task {
-            User.preview.save()
+            User.preview.save { _ in
+                ContentViewModel().logOut()
+                
+                XCTAssert(User.current == nil)
+            }
 
-            ContentViewModel().logOut()
-
-            XCTAssert(User.current == nil)
         }
     }
 

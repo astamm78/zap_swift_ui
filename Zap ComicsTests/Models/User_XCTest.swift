@@ -16,8 +16,9 @@ final class User_XCTest: XCTestCase {
 
     func test_save_shouldSaveCurrentUser() throws {
         let user = User.preview
-        user.save()
-        XCTAssert(User.current != nil)
+        user.save { _ in
+            XCTAssert(User.current != nil)
+        }
     }
 
 }
