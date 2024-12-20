@@ -22,6 +22,7 @@ struct FindAStoreView: View {
                 )
             }
         }
+        .navigationTitle("Find a Comic Store")
     }
 }
 

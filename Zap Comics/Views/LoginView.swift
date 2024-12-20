@@ -48,6 +48,13 @@ struct LoginView: View {
                         RegistrationView()
                     }
                     .accessibilityIdentifier(TestingIdentifiers.LoginView.registrationLink)
+                    
+                    NavigationLink(
+                        "Find a Comic Store"
+                    ) {
+                        FindAStoreView()
+                            .environmentObject(MapViewModel.shared)
+                    }
                 }
                 .padding()
             }
