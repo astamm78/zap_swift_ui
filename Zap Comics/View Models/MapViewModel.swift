@@ -73,7 +73,7 @@ class MapViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         guard let location = locations.first else { return }
         
         let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25))
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
         cameraPosition = .region(region)
         fetchNearbyStores()
         locationManager.stopUpdatingLocation()
